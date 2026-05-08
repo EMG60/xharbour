@@ -62,6 +62,8 @@
  *
  */
 
+#if defined( __WIN32__ ) && ! defined( __WIN64__ )
+
 #ifndef NODLL
 
 #define _WIN32_WINNT 0x0400
@@ -69,11 +71,9 @@
 
 #include "hbapiitm.h"
 
-#if defined( HB_OS_WIN )
-
-   #if defined( __WATCOMC__ )
-      #pragma disable_message ( 200 )
-   #endif
+#if defined( __WATCOMC__ )
+   #pragma disable_message ( 200 )
+#endif
 
 #include <windows.h>
 
@@ -281,39 +281,6 @@ HB_FUNC( DLLPREPARECALL )
    }
 }
 
-
-HB_FUNC( LOADLIBRARY )
-{
-   hb_retptr( ( void* ) LoadLibraryA( ( LPCSTR ) hb_parcx( 1 ) ) );
-}
-
-HB_FUNC( FREELIBRARY )
-{
-   hb_retl( FreeLibrary( ( HMODULE ) hb_parptr( 1 ) ) );
-}
-
-// compatibility
-HB_FUNC( DLLLOAD )
-{
-   HB_FUNCNAME( LOADLIBRARY ) ();
-}
-
-// compatibility
-HB_FUNC( DLLUNLOAD )
-{
-   HB_FUNCNAME( FREELIBRARY ) ();
-}
-
-HB_FUNC( GETLASTERROR )
-{
-   hb_retnl( GetLastError() );
-}
-
-HB_FUNC( SETLASTERROR )
-{
-   hb_retnl( GetLastError() );
-   SetLastError( hb_parnl( 1 ) );
-}
 
 HB_FUNC( GETPROCADDRESS )
 {
@@ -1031,12 +998,12 @@ HB_FUNC( CALLDLL )
 
 }
 
+#endif   /* NODLL */
 
-#endif   /* HB_OS_WIN32 */
+#endif /* End of __WIN32__ */
 
-#else
 
-#if defined( HB_OS_WIN_64 )
+#if defined( __WIN32__ ) || defined( __WIN64__ )
 
 #include <windows.h>
 #include "hbapi.h"
@@ -1056,6 +1023,22 @@ HB_FUNC( GETLASTERROR )
    hb_retnl( GetLastError() );
 }
 
-#endif   /* HB_OS_WIN64 */
+HB_FUNC( SETLASTERROR )
+{
+   hb_retnl( GetLastError() );
+   SetLastError( hb_parnl( 1 ) );
+}
 
-#endif   /* NODLL */
+// compatibility
+HB_FUNC( DLLLOAD )
+{
+   HB_FUNCNAME( LOADLIBRARY ) ();
+}
+
+// compatibility
+HB_FUNC( DLLUNLOAD )
+{
+   HB_FUNCNAME( FREELIBRARY ) ();
+}
+
+#endif /* End of __WIN32__ */

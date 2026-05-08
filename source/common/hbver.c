@@ -80,6 +80,10 @@
    #pragma warn(disable:2130)
 #endif
 
+#if defined( _MSC_VER )
+   #pragma warning( disable: 4996 )
+#endif
+
 #include "hbapi.h"
 #include "hbver.h"
 #include "hbcomp.h"
@@ -971,7 +975,7 @@ char * hb_verCompiler( void )
    else
       hb_strncpy( pszCompiler, "(unknown)", COMPILER_BUF_SIZE - 1 );
 
-#if defined( __clang_version__ )
+#if 0 && defined( __clang_version__ )
    if( strstr( __clang_version__, "(" ) )
       /* "2.0 (trunk 103176)" -> "(trunk 103176)" */
       hb_snprintf( szSub, sizeof( szSub ), " %s", strstr( __clang_version__, "(" ) );
@@ -1041,7 +1045,7 @@ char * hb_verBuildInfo( BOOL bOut )
 {
    char * szBuildInfo = ( char * ) hb_xgrab( 1024 );  // Should be enough IMO
 
-   hb_conOutStd_( "Harbour Build Info", 0, bOut );
+   hb_conOutStd_( "xHarbour Build Info", 0, bOut );
    hb_conOutStd_( hb_conNewLine(), 0, bOut );
    hb_conOutStd_( "---------------------------", 0, bOut );
    hb_conOutStd_( hb_conNewLine(), 0, bOut );
@@ -1101,7 +1105,7 @@ char * hb_verBuildInfo( BOOL bOut )
    hb_xstrcat( szBuildInfo, hb_verCvsLastEntry(), "\t", NULL );
    hb_conOutStd_( hb_conNewLine(), 0, bOut );
 
-   hb_conOutStd_( "ChangeLog SVN version: ", 0, bOut );
+   hb_conOutStd_( "ChangeLog ID: ", 0, bOut );
    hb_conOutStd_( hb_verCvsChangeLogID(), 0, bOut );
    hb_xstrcat( szBuildInfo, hb_verCvsChangeLogID(), "\t", NULL );
    hb_conOutStd_( hb_conNewLine(), 0, bOut );

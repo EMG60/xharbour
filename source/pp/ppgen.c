@@ -225,7 +225,7 @@ int hb_setGetDirSeparator( void )
    return HB_OS_PATH_DELIM_CHR;
 }
 
-long long int hb_verCvsID( void )
+ULONGLONG hb_verCvsID( void )
 {
    return 0;
 }
@@ -710,7 +710,7 @@ static int hb_pp_parseChangelog( PHB_PP_STATE pState, const char * pszFileName,
       char szLastEntry[256]          = { 0 };
       char szChgLogDateID[9]         = { 0 };
       char szChgLogTimeID[5]         = { 0 };
-      char szGitFakeID[15]           = { 0 };
+      char szGitFakeID[32]           = { 0 };
    
       do
       {
@@ -726,9 +726,16 @@ static int hb_pp_parseChangelog( PHB_PP_STATE pState, const char * pszFileName,
 
             //fprintf( stderr, "ChangeLog Git Hash: '%s'\n", szChangeLogGitHash );  
          }
-         else if( szChgLogDateID[0] == 0 && ( szUTC = strstr( szLine, "UTC-" ) ) != NULL && szUTC - szLine >= 17 )
+         else if( szChgLogDateID[0] == 0 && ( ( ( szUTC = strstr( szLine, "UTC-" ) ) != NULL ) || ( ( szUTC = strstr( szLine, "UTC+" ) ) != NULL ) ) && szUTC - szLine == 17 )
          {
-            hb_strncpy( szLastEntry, szLine, strlen(szLine) - 1 );
+            if( szLine[ strlen( szLine ) - 2 ] == '\r' )
+            {
+               hb_strncpy( szLastEntry, szLine, strlen( szLine ) - 2 );
+            }
+            else
+            {
+               hb_strncpy( szLastEntry, szLine, strlen( szLine ) - 1 );
+            }
 
             szChgLogDateID[0] = szLine[0];
             szChgLogDateID[1] = szLine[1];
@@ -749,8 +756,8 @@ static int hb_pp_parseChangelog( PHB_PP_STATE pState, const char * pszFileName,
             szChgLogTimeID[4] = '\0';
 
             //fprintf( stderr, "ChangeLog Time ID: '%s'\n", szChgLogTimeID );
-
-            snprintf( szGitFakeID, sizeof( szGitFakeID ), "%s%sLL", szChgLogDateID, szChgLogTimeID );
+            // HB_VER_GITFAKEID and HB_VER_CVSID with ULL suffix
+            snprintf( szGitFakeID, sizeof( szGitFakeID ), "HB_ULL( %s%s )", szChgLogDateID, szChgLogTimeID );
             //fprintf( stderr, "Git Fake ID: '%s'\n", szGitFakeID );
          }
       }

@@ -381,7 +381,7 @@ static void hb_dbfSetBlankRecord( DBFAREAP pArea, int iType )
             }
             else if( pField->uiType == HB_FT_DOUBLE )
             {
-               HB_PUT_LE_DOUBLE( pPtr, nValue );
+               HB_PUT_LE_DOUBLE( pPtr, ( double ) nValue );
             }
             else
             {
@@ -4632,7 +4632,7 @@ static HB_ERRCODE hb_dbfZap( DBFAREAP pArea )
       {
          if( pArea->area.lpFields[ uiField ].uiFlags & HB_FF_AUTOINC ||
              pArea->area.lpFields[ uiField ].uiType == HB_FT_AUTOINC )
-            hb_dbfSetNextValue( pArea, uiField, 0 );
+            hb_dbfSetNextValue( pArea, uiField, 1 );
       }
    }
 #endif

@@ -21,7 +21,7 @@ CC_DEBUGFLAGS =-Zi
 LNK_DEBUGFLAGS=-DEBUG
 !endif
 
-!if ("$(HB_ARCH)"=="64")
+!if ("$(HB_ARCH)"=="w64")
 ACE_LIB   =$(ACE64_LIB)
 HB_MACHINE=X64
 !else
@@ -44,7 +44,7 @@ OPTFLAGS    =-Otyb1
 !if ("$(__MSC__)"=="8") || ("$(__MSC__)"=="9")
 WARNINGFLAGS=-W4 -wd4127 -wd4054 -wd4055 -wd4244
 !else
-WARNINGFLAGS=-W4 -wd4127 -wd4054 -wd4055
+WARNINGFLAGS=-W4 -wd4127 -wd4054 -wd4055 -wd4206 -wd4201
 !endif
 !endif
 
@@ -130,7 +130,7 @@ HARBOUR_DLL_OBJS=\
 INCLUDE_DIR=-I"$(HB_DIR_ADS)" $(INCLUDE_DIR)
 !if ("$(HB_ADS_IMPLIB)"=="no")
 !else
-!if ("$(HB_ARCH)"=="64")
+!if ("$(HB_ARCH)"=="w64")
 COMPILERLIBS=\
     "$(HB_DIR_ADS)\ace64.lib"
 !else
@@ -183,15 +183,11 @@ RDDADS_LIB_OBJS=\
 
 CONTRIB_PROJECT=\
 	$(CONTRIB_PROJECT)\
-	$(HBSQLIT3_LIB)
-
-!if !("$(HB_ARCH)"=="64")
-CONTRIB_PROJECT=\
+	$(HBSQLIT3_LIB)\
 	$(CONTRIB_PROJECT)\
 	$(GTWVW_LIB)\
 	$(XWT_LIB)\
 	$(GTWVG_LIB)
-!endif
 
 CONTRIB_PROJECT=\
 	$(CONTRIB_PROJECT)\
@@ -212,8 +208,10 @@ RC_CMD         =$(RC) -r -i"$(CC_DIR)\include" -fo $@ $**
 HB_CMD         =$(HARBOUR_EXE) -n1 $(HARBOURFLAGS) $** -o$@
 HB_CMD_MAIN    =$(HARBOUR_EXE) -n0 $(HARBOURFLAGS) -d_USE_APPMAIN_ $** -o$@
 CC_CMD         =$(CC) $(CLIBFLAGS) $(CPPFLAGS) -Fo$@ $**
+CC_CMD_NOWARN  =$(CC) -wd4244 -wd4311 -wd4312 -wd4456 $(CLIBFLAGS) $(CPPFLAGS) -Fo$@ $**
 CC_CMD_HARBOUR =$(CC) $(CLIBFLAGS) -D__HB_COMPILER__ $(CC_COMP_DEFINES) $(CPPFLAGS) -Fo$@ $**
 CCC_CMD        =$(CC) $(CLIBFLAGS) -Fo$@ $**
+CCC_CMD_NOWARN =$(CC) -wd4018 -wd4100 -wd4189 -wd4244 -wd4267 -wd4311 -wd4312 -wd4324 -wd4389 -wd4456 -wd4701 -wd4706 $(CLIBFLAGS) -Fo$@ $**
 LIB_CMD        =$(LIBEXE) -MACHINE:$(HB_MACHINE) -NOLOGO -OUT:$@ $**
 LIB_CMD_1      =$(LIB_CMD)
 LINK_CMD       =$(LINKEXE) $(LNK_DEBUGFLAGS) -MACHINE:$(HB_MACHINE) -NOLOGO -OUT:$@ $** $(LINKERFLAGS) $(MANIFESTFLAGS)
@@ -224,7 +222,7 @@ CC_CMD_ZIP     =$(CC)\
 	$(OPTFLAGS) $(CMODEFLAGS) -W3 -I"$(HBZIP_DIR)\INCLUDE" -I"include" -I"$(CC_DIR)\include" -TP\
 	-D_WIN32 $(ZIP_DEBUGFLAGS) -D_MBCS -D"_LIB"\
 	-Fp"$(OBJ_DIR)\hbzip.pch" -Fd"$(OBJ_DIR)\\"\
-	-D_CRT_SECURE_NO_WARNINGS -Fo$@ $**
+	-D_CRT_SECURE_NO_WARNINGS -wd4244 -wd4267 -wd4312 -wd4834 -Fo$@ $**
 
 #===============================================================================
 # Building rules of Object files

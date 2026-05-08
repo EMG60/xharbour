@@ -64,6 +64,10 @@
 #  include <curl/types.h>
 #endif
 
+#ifndef HB_NO_DV_MEMCPY
+   #define HB_NO_DV_MEMCPY
+#endif
+
 #include "hbapi.h"
 #include "hbapiitm.h"
 #include "hbapierr.h"
@@ -99,8 +103,13 @@ typedef struct _HB_CURL
 {
    CURL * curl;
 
-   struct curl_httppost * pHTTPPOST_First;
-   struct curl_httppost * pHTTPPOST_Last;
+   #if LIBCURL_VERSION_NUM >= 0x073800
+      curl_mime * mime;
+   #else
+      struct curl_httppost * pHTTPPOST_First;
+      struct curl_httppost * pHTTPPOST_Last;
+   #endif   
+
    struct curl_slist *    pHTTPHEADER;
    struct curl_slist *    pHTTP200ALIASES;
    struct curl_slist *    pQUOTE;
@@ -125,6 +134,7 @@ typedef struct _HB_CURL
    size_t dl_pos;
 
    PHB_ITEM pProgressCallback;
+   PHB_ITEM pWriteFunctionCallback;
 
    PHB_HASH_TABLE pHash;
 
@@ -206,7 +216,7 @@ static void * hb_curl_xgrab( size_t size )
 
 static void hb_curl_xfree( void * p )
 {
-   hb_xfree( p );
+   if ( p ) hb_xfree( p );
 }
 
 static void * hb_curl_xrealloc( void * p, size_t size )
@@ -411,9 +421,27 @@ static int hb_curl_progress_callback( void * Cargo, double dltotal, double dlnow
    return 0;
 }
 
+static size_t hb_curl_writefunction_callback( void * buffer, size_t size, size_t nmemb, void * Cargo )
+{
+   PHB_CURL hb_curl = ( PHB_CURL ) Cargo;
+
+   if( hb_curl->pWriteFunctionCallback && hb_vmRequestReenter() )
+   {
+      hb_vmPushEvalSym();
+      hb_vmPush( hb_curl->pWriteFunctionCallback );
+      hb_vmPushString( ( const char * ) buffer, size * nmemb );
+      hb_vmSend( 1 );
+      hb_vmRequestRestore();
+      return size * nmemb;
+   }
+
+   return 0;
+}
+
 /* ---------------------------------------------------------------------------- */
 /* Helpers */
 
+#if LIBCURL_VERSION_NUM < 0x073800
 static void hb_curl_form_free( struct curl_httppost ** ptr )
 {
    if( ptr && * ptr )
@@ -422,6 +450,7 @@ static void hb_curl_form_free( struct curl_httppost ** ptr )
       * ptr = NULL;
    }
 }
+#endif
 
 static void hb_curl_slist_free( struct curl_slist ** ptr )
 {
@@ -508,8 +537,16 @@ static void PHB_CURL_free( PHB_CURL hb_curl, BOOL bFree )
    curl_easy_setopt( hb_curl->curl, CURLOPT_MAIL_RCPT, NULL );
 #endif
 
+#if LIBCURL_VERSION_NUM >= 0x073800
+   if( hb_curl->mime )
+   {
+      curl_mime_free( hb_curl->mime );
+      hb_curl->mime = NULL;
+   }
+#else
    hb_curl_form_free( &hb_curl->pHTTPPOST_First );
    hb_curl->pHTTPPOST_Last = NULL;
+#endif
    hb_curl_slist_free( &hb_curl->pHTTPHEADER );
    hb_curl_slist_free( &hb_curl->pHTTP200ALIASES );
    hb_curl_slist_free( &hb_curl->pQUOTE );
@@ -529,6 +566,12 @@ static void PHB_CURL_free( PHB_CURL hb_curl, BOOL bFree )
    {
       hb_itemRelease( hb_curl->pProgressCallback );
       hb_curl->pProgressCallback = NULL;
+   }
+
+   if( hb_curl->pWriteFunctionCallback )
+   {
+      hb_itemRelease( hb_curl->pWriteFunctionCallback );
+      hb_curl->pWriteFunctionCallback = NULL;
    }
 
    if( hb_curl->pHash )
@@ -776,8 +819,32 @@ HB_FUNC( CURL_EASY_SETOPT )
 
          /* Callback */
 
+         case HB_CURLOPT_WRITEFUNCTION:
+            {
+               PHB_ITEM pWriteFunctionCallback = hb_param( 3, HB_IT_BLOCK | HB_IT_SYMBOL );
+
+               if( hb_curl->pWriteFunctionCallback )
+               {
+                  curl_easy_setopt( hb_curl->curl, CURLOPT_WRITEFUNCTION, NULL );
+                  curl_easy_setopt( hb_curl->curl, CURLOPT_WRITEDATA, NULL );
+
+                  hb_itemRelease( hb_curl->pWriteFunctionCallback );
+                  hb_curl->pWriteFunctionCallback = NULL;
+               }
+
+               if( pWriteFunctionCallback )
+               {
+                  hb_curl->pWriteFunctionCallback = hb_itemNew( pWriteFunctionCallback );
+                  /* unlock the item so GC will not mark them as used */
+                  hb_gcUnlock( hb_curl->pWriteFunctionCallback );
+
+                  curl_easy_setopt( hb_curl->curl, CURLOPT_WRITEFUNCTION, hb_curl_writefunction_callback );
+                  res = curl_easy_setopt( hb_curl->curl, CURLOPT_WRITEDATA, hb_curl );
+               }
+            }
+            break;
+
          /* These are hidden on the Harbour level: */
-         /* HB_CURLOPT_WRITEFUNCTION */
          /* HB_CURLOPT_WRITEDATA */
          /* HB_CURLOPT_READFUNCTION */
          /* HB_CURLOPT_READDATA */
@@ -1001,28 +1068,46 @@ HB_FUNC( CURL_EASY_SETOPT )
             res = curl_easy_setopt( hb_curl->curl, CURLOPT_POSTFIELDSIZE_LARGE, HB_CURL_OPT_LARGENUM( 3 ) );
             break;
 #endif
-         case HB_CURLOPT_HTTPPOST:
+            case HB_CURLOPT_HTTPPOST:
+            case HB_CURLOPT_MIMEPOST:
             {
                PHB_ITEM pArray = hb_param( 3, HB_IT_ARRAY );
 
                if( pArray )
                {
-                  ULONG ulPos;
-                  ULONG ulArrayLen = ( ULONG ) hb_arrayLen( pArray );
+                  HB_SIZE nPos;
+                  HB_SIZE nLen = hb_arrayLen( pArray );
 
-                  for( ulPos = 0; ulPos < ulArrayLen; ++ulPos )
+            #if LIBCURL_VERSION_NUM >= 0x073800
+                  if( hb_curl->mime || nLen > 0 )
                   {
-                     PHB_ITEM pSubArray = hb_arrayGetItemPtr( pArray, ulPos + 1 );
+                     if( ! hb_curl->mime )
+                        hb_curl->mime = curl_mime_init( hb_curl->curl );
+
+                     for( nPos = 1; nPos <= nLen; ++nPos )
+                     {
+                        PHB_ITEM pSubArray = hb_arrayGetItemPtr( pArray, nPos );
+                        curl_mimepart * part = curl_mime_addpart( hb_curl->mime );
+
+                        curl_mime_name( part, hb_arrayGetCPtr( pSubArray, 1 ) );
+                        curl_mime_filedata( part, hb_arrayGetCPtr( pSubArray, 2 ) );
+                     }
+                     res = curl_easy_setopt( hb_curl->curl, CURLOPT_MIMEPOST, hb_curl->mime );
+                  }
+            #else
+                  for( nPos = 1; nPos <= nLen; ++nPos )
+                  {
+                     PHB_ITEM pSubArray = hb_arrayGetItemPtr( pArray, nPos );
 
                      curl_formadd( &hb_curl->pHTTPPOST_First,
-                                   &hb_curl->pHTTPPOST_Last,
-                                   CURLFORM_COPYNAME, hb_arrayGetCPtr( pSubArray, 1 ),
-                                   CURLFORM_NAMELENGTH, hb_arrayGetCLen( pSubArray, 1 ),
-                                   CURLFORM_FILE, hb_curl_StrHash( hb_curl, hb_arrayGetCPtr( pSubArray, 2 ) ),
-                                   CURLFORM_END );
+                                 &hb_curl->pHTTPPOST_Last,
+                                 CURLFORM_COPYNAME, hb_arrayGetCPtr( pSubArray, 1 ),
+                                 CURLFORM_NAMELENGTH, hb_arrayGetCLen( pSubArray, 1 ),
+                                 CURLFORM_FILE, hb_curl_StrHash( hb_curl, hb_arrayGetCPtr( pSubArray, 2 ) ),
+                                 CURLFORM_END );
                   }
-
                   res = curl_easy_setopt( hb_curl->curl, CURLOPT_HTTPPOST, hb_curl->pHTTPPOST_First );
+            #endif
                }
             }
             break;
@@ -1401,7 +1486,7 @@ HB_FUNC( CURL_EASY_SETOPT )
             res = curl_easy_setopt( hb_curl->curl, CURLOPT_MAXCONNECTS, hb_parnl( 3 ) );
             break;
          case HB_CURLOPT_CLOSEPOLICY: /* OBSOLETE, does nothing. */
-            res = curl_easy_setopt( hb_curl->curl, CURLOPT_CLOSEPOLICY, hb_parnl( 3 ) );
+            res = curl_easy_setopt( hb_curl->curl, ( CURLoption ) CURLOPT_CLOSEPOLICY, hb_parnl( 3 ) );
             break;
          case HB_CURLOPT_FRESH_CONNECT:
             res = curl_easy_setopt( hb_curl->curl, CURLOPT_FRESH_CONNECT, HB_CURL_OPT_BOOL( 3 ) );

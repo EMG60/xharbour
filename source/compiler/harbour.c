@@ -89,7 +89,7 @@ static void hb_compGenVarPCode( BYTE, char * );                      /* generate
 static void hb_compGenLocalName( USHORT wLocal, char * szVarName );  /* generates the pcode for local variable name */
 
 static PFUNCTION hb_compFunctionNew( char *, HB_SYMBOLSCOPE );       /* creates and initialises the _FUNC structure */
-static PINLINE hb_compInlineNew( char * );                           /* creates and initialises the __INLINE structure */
+static PINLINE hb_compInlineNew( char * );                           /* creates and initialises the __XHBINLINE structure */
 static void hb_compCheckDuplVars( PVAR pVars, char * szVarName );    /*checks for duplicate variables definitions */
 static int hb_compProcessRSPFile( char * );                          /* process response file */
 static int hb_compCompile( char * szPrg );
@@ -1881,7 +1881,7 @@ static PINLINE hb_compInlineNew( char * szName )
 {
    PINLINE pInline;
 
-   pInline              = ( PINLINE ) hb_xgrab( sizeof( __INLINE ) );
+   pInline              = ( PINLINE ) hb_xgrab( sizeof( __XHBINLINE ) );
 
    pInline->szName      = szName;
    pInline->pCode       = NULL;
@@ -2269,7 +2269,7 @@ PFUNCTION hb_compFunctionResolve( char * szFunctionName, PNAMESPACE pCallerNames
 #if defined( __XCC__ )
             return ( PFUNCTION ) 1;
 #else
-            return ( PFUNCTION ) ( HB_LONG ) 1;
+            return ( PFUNCTION ) ( LONG_PTR ) 1;
 #endif
          }
          else
@@ -4132,8 +4132,29 @@ static HB_BOOL hb_compPCodeTraceAssignedUnused( PFUNCTION pFunc, HB_SIZE nPos, H
              pFunc->pCode[ nPos ] == HB_P_JUMPNEAR ||
              pFunc->pCode[ nPos ] == HB_P_JUMPFAR )
          {
+            HB_SIZE i;
+
+            for( i = nPos2; ; ++i )
+            {
+               if( pFunc->pCode[ i ] == HB_P_ENDPROC || pFunc->pCode[ i ] == HB_P_ENDBLOCK )
+                  break;
+
+               if( pFunc->pCode[ i ] == HB_P_SEQEND )
+                  return HB_TRUE;
+            }
+
             nPos = nPos2;
             continue;
+         }
+
+         if( pFunc->pCode[ nPos ] == HB_P_JUMPFALSE ||
+             pFunc->pCode[ nPos ] == HB_P_JUMPFALSENEAR ||
+             pFunc->pCode[ nPos ] == HB_P_JUMPFALSEFAR )
+         {
+            if( pFunc->pCode[ nPos2 - 3 ] == HB_P_JUMP ||
+                pFunc->pCode[ nPos2 - 2 ] == HB_P_JUMPNEAR ||
+                pFunc->pCode[ nPos2 - 4 ] == HB_P_JUMPFAR )
+               return HB_TRUE;
          }
 
          if( hb_compPCodeTraceAssignedUnused( pFunc, nPos2, pMap, isLocal ) )
@@ -4286,32 +4307,6 @@ void hb_compFinalizeFunction( void ) /* fixes all last defined function returns 
          hb_compGenPCode1( HB_P_ENDPROC );
       }
 
-      if( pFunc->bFlags & FUN_USES_LOCAL_PARAMS )
-      {
-         USHORT PCount = pFunc->wParamCount;
-
-         /* do not adjust if local parameters are used -remove NOOPs only */
-         pFunc->wParamCount = 0;
-         /* There was a PARAMETERS statement used.
-          * NOTE: This fixes local variables references in a case when
-          * there is PARAMETERS statement after a LOCAL variable declarations.
-          * All local variables are numbered from 1 - which means use first
-          * item from the eval stack. However if PARAMETERS statement is used
-          * then there are additional items on the eval stack - the
-          * function arguments. Then first local variable is at the position
-          * (1 + <number of arguments>). We cannot fix this numbering
-          * because the PARAMETERS statement can be used even at the end
-          * of function body when all local variables are already created.
-          */
-
-         hb_compFixFuncPCode( pFunc );
-         pFunc->wParamCount = PCount;
-      }
-      else
-         hb_compFixFuncPCode( pFunc );
-
-      hb_compOptimizeJumps();
-
       if( hb_comp_iWarnings )
       {
          /*
@@ -4413,6 +4408,32 @@ void hb_compFinalizeFunction( void ) /* fixes all last defined function returns 
          pFunc->iStackFunctions  = 0;
          pFunc->iStackClasses    = 0;
       }
+
+      if( pFunc->bFlags & FUN_USES_LOCAL_PARAMS )
+      {
+         USHORT PCount = pFunc->wParamCount;
+
+         /* do not adjust if local parameters are used -remove NOOPs only */
+         pFunc->wParamCount = 0;
+         /* There was a PARAMETERS statement used.
+          * NOTE: This fixes local variables references in a case when
+          * there is PARAMETERS statement after a LOCAL variable declarations.
+          * All local variables are numbered from 1 - which means use first
+          * item from the eval stack. However if PARAMETERS statement is used
+          * then there are additional items on the eval stack - the
+          * function arguments. Then first local variable is at the position
+          * (1 + <number of arguments>). We cannot fix this numbering
+          * because the PARAMETERS statement can be used even at the end
+          * of function body when all local variables are already created.
+          */
+
+         hb_compFixFuncPCode( pFunc );
+         pFunc->wParamCount = PCount;
+      }
+      else
+         hb_compFixFuncPCode( pFunc );
+
+      hb_compOptimizeJumps();
    }
 }
 
@@ -4635,7 +4656,7 @@ static void hb_compOptimizeJumps( void )
    {
       LONG lOffset;
 
-      if( iPass == 2 && ! hb_comp_bDebugInfo && hb_comp_bLineNumbers )
+      if( iPass > 0 && ! hb_comp_bDebugInfo && hb_comp_bLineNumbers )
          hb_compStripFuncLines( hb_comp_functions.pLast );
 
       if( hb_comp_functions.pLast->iJumps > 0 )

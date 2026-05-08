@@ -50,6 +50,10 @@
  *
  */
 
+#if defined( _MSC_VER )
+   #pragma warning( disable: 4996 )
+#endif
+
 #include "hbsetup.h"
 
 #if defined( HB_OS_WIN ) && ( ! defined( __RSXNT__ ) ) && ( ! defined( __CYGWIN__ ) )
@@ -79,7 +83,7 @@ HB_EXTERN_END
 #if defined( __XCC__ )
    #define HWND_BROADCAST  ((HWND)0xffff)
 #else
-   #define HWND_BROADCAST  ((HWND)(HB_LONG)0xffff)
+   #define HWND_BROADCAST  ((HWND)(LONG_PTR)0xffff)
 #endif
 
 BOOL hb_isLegacyDevice( LPTSTR pPrinterName )

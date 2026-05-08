@@ -67,6 +67,8 @@
 #include <windows.h>
 #include <time.h>
 #include <stdio.h>
+
+#include "hbdefs.h"
 #include "hbver.h"
 #include "hbverbld.h"
 
@@ -290,10 +292,10 @@ static char * _hb_verCompiler( void )
 #     endif
 #   endif
 #else
-         sprintf( pszCompiler, "%s%s %hd.%hd.%hd", pszName, szSub, iVerMajor, iVerMinor, iVerPatch );
+         sprintf( pszCompiler, "%s%s %i.%i.%i", pszName, szSub, iVerMajor, iVerMinor, iVerPatch );
 #endif
       else if( iVerMajor != 0 || iVerMinor != 0 )
-         sprintf( pszCompiler, "%s%s %hd.%hd", pszName, szSub, iVerMajor, iVerMinor );
+         sprintf( pszCompiler, "%s%s %i.%i", pszName, szSub, iVerMajor, iVerMinor );
       else
          sprintf( pszCompiler, "%s%s", pszName, szSub );
 #endif
@@ -332,7 +334,7 @@ static char * cParExp( char * szParam, char * szStr )
             break;
 
          default:
-            iPos = pAction - szParam + 1;
+            iPos = ( int ) ( pAction - szParam + 1 );
             break;
       }
    }
@@ -353,7 +355,7 @@ int main( int argc, char * argv[] )
          char *      aMo[]     = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
          char        szParam[ 265 ];
 
-         unsigned long long llvalue = HB_VER_CVSID; 
+         ULONGLONG llvalue = HB_VER_CVSID; 
          unsigned long dw1 = llvalue >> 32; // Get the first DWORD (the higher 32 bits) 
          unsigned long dw2 = llvalue & 0xFFFFFFFF; // Get the second DWORD (the lower 32 bits) 
 

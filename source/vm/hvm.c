@@ -7305,11 +7305,9 @@ void hb_vmSend( USHORT uiParams )
          if( pSelfBase->uiPrevCls ) /* Is is a Super cast ? */
          {
             HB_ITEM_NEW( RealSelf );
-            USHORT uiClass;
 
             /* printf( "\n VmSend Method: %s \n", pSym->szName ); */
-            uiClass                                   = pSelfBase->uiClass;
-            pItem->item.asSymbol.pCargo->uiSuperClass = uiClass;
+            pItem->item.asSymbol.pCargo->uiSuperClass = pSelfBase->uiClass;
 
             /* TraceLog( NULL, "pRealSelf %p pItems %p\n", pRealSelf, pSelfBase->pItems );
              */
@@ -10042,6 +10040,10 @@ PSYMBOLS    hb_vmRegisterSymbols( PHB_SYMB pSymbolTable   , UINT uiSymbols, cons
          /* first public defined symbol to start execution */
          s_pSymStart = pSymbol;
 
+      if( fDynLib == FALSE && ( hSymScope & HB_FS_FIRST ) != 0 && ( hSymScope & HB_FS_STATIC ) == 0 && strcmp( pSymbol->szName, "MAIN" ) == 0 )
+         /* force MAIN() as startup procedure */
+         s_pSymStart = pSymbol;
+
       /* Enable this code to see static functions which are registered in global dynsym table */
 #if 0
       if( fPublic && ( hSymScope & HB_FS_STATIC ) != 0 )
@@ -10204,13 +10206,13 @@ PSYMBOLS    hb_vmRegisterSymbols( PHB_SYMB pSymbolTable   , UINT uiSymbols, cons
                        if( ( pModuleSymbols->hScope & HB_FS_DEFERRED ) == HB_FS_DEFERRED )
                        {
                           PHB_SYMB       pModuleSymbol;
-                          register UINT  ui;
+                          register UINT  ui2;
 #ifdef DEBUG_SYMBOLS
                           TraceLog( NULL, "Module: '%s' has Deferred Symbols, resolving: '%s' \n", pModuleSymbols->szModuleName, pSymbol->szName );
 #endif /* DEBUG_SYMBOLS */
-                          for( ui = 0; ui < pModuleSymbols->uiModuleSymbols; ui++ )
+                          for( ui2 = 0; ui2 < pModuleSymbols->uiModuleSymbols; ui2++ )
                           {
-                             pModuleSymbol = pModuleSymbols->pSymbolTable + ui;
+                             pModuleSymbol = pModuleSymbols->pSymbolTable + ui2;
 
                              if( pModuleSymbol->pDynSym == pDynSym && ( ( pModuleSymbol->scope.value & HB_FS_DEFERRED ) == HB_FS_DEFERRED ) /* && pModuleSymbol->value.pFunPtr == NULL */ )
                              {

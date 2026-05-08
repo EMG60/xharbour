@@ -68,9 +68,12 @@
 
 //#define DEBUG_MARKERS
 
+#if defined( _MSC_VER )
+   #pragma warning( disable: 4996 )
+#endif
+
 /* Pacify MSVS2005 and above */
 #if defined(_MSC_VER) && (_MSC_VER>=1400)
-   #define _CRT_SECURE_NO_WARNINGS
    #define _CRT_SECURE_NO_DEPRECATE
 #endif
 
@@ -279,7 +282,7 @@ const char * hb_pp_szWarnings[] =
    "1Overloaded #define %s"
 };
 
-void hb_pp_SetRules( PHB_INCLUDE_FUNC hb_compInclude, BOOL hb_comp_bQuiet )
+void hb_pp_SetRules( PHB_INCLUDE_FUNC hb_compInclude, BOOL hb_comp_bQuiet2 )
 {
    static COMMANDS sC___IIF = { 0, "IF", "(\16\1A00\17,\16\1B00\17,\16\1C00\17 )", "IIF(\1A00,\1B00,\1C00 )", NULL };
 
@@ -342,7 +345,7 @@ void hb_pp_SetRules( PHB_INCLUDE_FUNC hb_compInclude, BOOL hb_comp_bQuiet )
 
                if( s_kolAddComs || s_kolAddTras || s_kolAddDefs > 3 )
                {
-                  if( ! hb_comp_bQuiet )
+                  if( ! hb_comp_bQuiet2 )
                      printf( "Loaded: %i Commands, %i Translates, %i Defines from: %s\n", s_kolAddComs, s_kolAddTras, s_kolAddDefs - 3, szFileName );
                }
                else
@@ -375,7 +378,7 @@ void hb_pp_SetRules( PHB_INCLUDE_FUNC hb_compInclude, BOOL hb_comp_bQuiet )
       }
       else
       {
-         if( ! hb_comp_bQuiet )
+         if( ! hb_comp_bQuiet2 )
             printf( "Standard command definitions excluded.\n" );
 
          hb_pp_Init();
@@ -859,11 +862,11 @@ int hb_pp_ParseDirective( char * sLine )
 
         if( DefSearch( sID, NULL, NULL ) )
         {
-           hb_pp_Stuff( "1", pDefined, 1, pTemp - pDefined, strlen( pDefined ) );
+           hb_pp_Stuff( "1", pDefined, 1, ( int ) ( pTemp - pDefined ), ( int ) strlen( pDefined ) );
         }
         else
         {
-           hb_pp_Stuff( "0", pDefined, 1, pTemp - pDefined, strlen( pDefined ) );
+           hb_pp_Stuff( "0", pDefined, 1, ( int ) ( pTemp - pDefined ), ( int ) strlen( pDefined ) );
         }
      }
 
@@ -929,11 +932,11 @@ int hb_pp_ParseDirective( char * sLine )
 
                if( DefSearch( sID, NULL, NULL ) )
                {
-                  hb_pp_Stuff( "1", pDefined, 1, pTemp - pDefined, strlen( pDefined ) );
+                  hb_pp_Stuff( "1", pDefined, 1, ( int ) ( pTemp - pDefined ), ( int ) strlen( pDefined ) );
                }
                else
                {
-                  hb_pp_Stuff( "0", pDefined, 1, pTemp - pDefined, strlen( pDefined ) );
+                  hb_pp_Stuff( "0", pDefined, 1, ( int ) ( pTemp - pDefined ), ( int ) strlen( pDefined ) );
                }
             }
 
@@ -1187,7 +1190,7 @@ int hb_pp_ParseDefine( char * sLine )
            if( ISID( *sLine ) && ( iParamLen = NextName( &sLine, (char *) sParam ) ) > 0 )
            {
               char *pTmp;
-              int iPos, iLen = strlen( sLine );
+              int iPos, iLen = ( int ) strlen( sLine );
 
               iParams++;
 
@@ -1988,7 +1991,7 @@ static void ConvertPatterns( char * mpatt, int mlen, char * rpatt, int rlen )
            //printf( "Find Marker: %c Optional: %i >%.*s< In: Len: %i %.*s\n", lastchar, uiOpenBrackets, explen, exppatt, mlen - ( ptr - mpatt ), mlen - ( ptr - mpatt ), ptr );
 
            // Find if SAME Marker Name is used again in the remainder of the Match Rule.
-           while( ( ifou = AtSkipStringsInRules( exppatt, explen, ptr, mlen - ( ptr - mpatt ) ) ) > 0 )
+           while( ( ifou = AtSkipStringsInRules( exppatt, explen, ptr, ( ULONG ) ( mlen - ( ptr - mpatt ) ) ) ) > 0 )
            {
               char *pTmp = ptr + ifou - 2, *pStart;
 
@@ -2088,7 +2091,7 @@ static void ConvertPatterns( char * mpatt, int mlen, char * rpatt, int rlen )
 
               // Use same marker ID in expreal[1]
               expreal[2] = exptype;
-              rmlen = ( ptr + ifou + explen ) - pStart;
+              rmlen = ( int ) ( ( ptr + ifou + explen ) - pStart );
 
               //printf( "Repeated: >%.*s<\n", rmlen, pStart );
               //printf( "maptt: >%s<\n", mpatt );
@@ -2103,7 +2106,7 @@ static void ConvertPatterns( char * mpatt, int mlen, char * rpatt, int rlen )
 
            //printf( "Find Marker: >%.*s< In: Len: %i %.*s\n", explen, exppatt, rlen - ( ptr - rpatt ), rlen - ( ptr - rpatt ), ptr );
 
-           while( ( ifou = AtSkipStringsInRules( exppatt, explen, ptr, rlen - ( ptr - rpatt ) ) ) > 0 )
+           while( ( ifou = AtSkipStringsInRules( exppatt, explen, ptr, ( ULONG ) ( rlen - ( ptr - rpatt ) ) ) ) > 0 )
            {
               /* Convert result marker into inner format */
               ifou --;
@@ -2494,7 +2497,7 @@ int hb_pp_ParseExpression( char * sLine, char * sOutLine )
            *( sLine + isdvig + ipos - 1 ) = ';';
         }
 
-        lens = strlen( ptri );
+        lens = ( int ) strlen( ptri );
 
         //printf( "Len: %i, Digesting: >%s<\n", lens, ptri );
 
@@ -2544,12 +2547,12 @@ int hb_pp_ParseExpression( char * sLine, char * sOutLine )
 
               if( ( i = WorkDefine( &ptri, ptro, stdef ) ) >= 0 )
               {
-                 lens = strlen( ptrb );
+                 lens = ( int ) strlen( ptrb );
 
                  if( ipos > 0 )
                  {
                     *( ptrb + lens ) = ';';
-                    lens += strlen( ptrb + lens + 1 );
+                    lens += ( int ) strlen( ptrb + lens + 1 );
                  }
 
                  if( hb_comp_PPTrace )
@@ -2558,7 +2561,7 @@ int hb_pp_ParseExpression( char * sLine, char * sOutLine )
                     fprintf( hb_comp_PPTrace, "#defined >%.*s<\n", i, ptro );
                  }
 
-                 hb_pp_Stuff( ptro, ptrb, i, ptri - ptrb, lens + 1 );
+                 hb_pp_Stuff( ptro, ptrb, i, ( int ) ( ptri - ptrb ), lens + 1 );
 
                  #if 0
                  if( hb_comp_PPTrace )
@@ -2642,7 +2645,7 @@ int hb_pp_ParseExpression( char * sLine, char * sOutLine )
                     fprintf( hb_comp_PPTrace, "#[x]translated >%.*s<\n", i, ptro );
                  }
 
-                 hb_pp_Stuff( ptro, ptri, i, lens, strlen( ptri ) );
+                 hb_pp_Stuff( ptro, ptri, i, lens, ( int ) strlen( ptri ) );
 
                  #if 0
                  if( hb_comp_PPTrace )
@@ -2729,7 +2732,7 @@ int hb_pp_ParseExpression( char * sLine, char * sOutLine )
 
               if( isdvig + ipos > 0 )
               {
-                 lens = strlen( sLine + isdvig );
+                 lens = ( int ) strlen( sLine + isdvig );
 
                  if( hb_comp_PPTrace )
                  {
@@ -3390,7 +3393,7 @@ static int CommandStuff( char * ptrmp, char * inputLine, char * ptro, int * lenr
   }
   else
   {
-     return ptri - inputLine;
+     return ( int ) ( ptri - inputLine );
   }
 }
 
@@ -3399,7 +3402,7 @@ static int RemoveNotInstanciated( char * stroka )
   char *ptr = stroka;
   int State = STATE_INIT;
   BOOL bDirective = FALSE;
-  int lenres = strlen( stroka );
+  int lenres = ( int ) strlen( stroka );
   char cLastChar = '\0';
 
   HB_TRACE(HB_TR_DEBUG, ("RemoveNotInstanciated(%s)", stroka));
@@ -3454,8 +3457,8 @@ static int RemoveNotInstanciated( char * stroka )
 
              if( *ptr == '\16' && ( pClose = strchr( ptr, '\17' ) ) != NULL )
              {
-                hb_pp_Stuff( "", ptr, 0, pClose - ptr + 1, lenres - (ptr - stroka) );
-                lenres -= pClose - ptr + 1;
+                hb_pp_Stuff( "", ptr, 0, ( int ) ( pClose - ptr + 1 ), ( int ) ( lenres - ( ptr - stroka ) ) );
+                lenres -= ( int ) ( pClose - ptr + 1 );
              }
           }
           break;
@@ -3755,7 +3758,7 @@ static int WorkMarkers( char ** ptrmp, char ** ptri, char * ptro, int * lenres, 
            ptrtemp = ptr;
            if( !strincmp( *ptri, &ptr, !com_or_xcom ) )
            {
-              lenreal = stroncpy( expreal, *ptri, ( ptr - ptrtemp ) );
+              lenreal = stroncpy( expreal, *ptri, ( int ) ( ptr - ptrtemp ) );
               *ptri += lenreal;
               SearnRep( exppatt, expreal, lenreal, ptro, lenres );
               rezrestr = 1;
@@ -3869,7 +3872,7 @@ static int getExpReal( char * expreal, char ** ptri, char cMarkerType, int maxre
 
       if( pTmp )
       {
-         lens = pTmp - *ptri;
+         lens = ( int ) ( pTmp - *ptri );
 
          if( expreal )
          {
@@ -3882,7 +3885,7 @@ static int getExpReal( char * expreal, char ** ptri, char cMarkerType, int maxre
       }
       else
       {
-         lens = strlen( *ptri );
+         lens = ( int ) strlen( *ptri );
 
          if( expreal )
          {
@@ -4959,7 +4962,7 @@ static BOOL isExpres( char * stroka, char cMarkerType )
 
   //printf( "isExp: >%s<\n", stroka );
 
-  l1 = strlen( stroka );
+  l1 = ( int ) strlen( stroka );
   l2 = getExpReal( NULL, &stroka, cMarkerType, HB_PP_STR_SIZE, 1 );
 
   //printf( "Len1: %i Len2: %i RealExp: >%s< Last: %c\n", l1, l2, stroka - l2, ( stroka - l2 )[l1-1] );
@@ -5331,9 +5334,9 @@ static void SearnRep( char * exppatt, char * expreal, int lenreal, char * ptro, 
                }
                else
                {
-                  hb_pp_Stuff( "", ptr, 0, ptr2 - ptr + 1, *lenres - ( ptr - ptro ) );
-                  *lenres -= ptr2-ptr+1;
-                  isdvig = ptr - ptro;
+                  hb_pp_Stuff( "", ptr, 0, ( int ) ( ptr2 - ptr + 1 ), ( int ) ( *lenres - ( ptr - ptro ) ) );
+                  *lenres -= ( int ) ( ptr2-ptr+1 );
+                  isdvig = ( int ) ( ptr - ptro );
                   rezs = TRUE;
                }
             }
@@ -5343,7 +5346,7 @@ static void SearnRep( char * exppatt, char * expreal, int lenreal, char * ptro, 
                {
                   BYTE cMarkerCount = '0', cGroupCount = '0';
 
-                  lennew = ptr2 - ptr - 1;
+                  lennew = ( int ) ( ptr2 - ptr - 1 );
 
                   // Flagging the instanciated Marker in Repeatable group as Instanciated.
                   for( i = 0; i < lennew; i++ )
@@ -5441,9 +5444,9 @@ static void SearnRep( char * exppatt, char * expreal, int lenreal, char * ptro, 
                      }
                   }
 
-                  hb_pp_Stuff( expnew, ptr, lennew, 0, *lenres-(ptr-ptro)+1 );
+                  hb_pp_Stuff( expnew, ptr, lennew, 0, ( int ) ( *lenres-(ptr-ptro)+1 ) );
                   *lenres += lennew;
-                  isdvig = ptr - ptro + ( ptr2 - ptr - 1 ) + lennew;
+                  isdvig = ( int ) ( ptr - ptro + ( ptr2 - ptr - 1 ) + lennew );
                   rezs = TRUE;
 
                   #ifdef DEBUG_MARKERS
@@ -5476,7 +5479,7 @@ static void SearnRep( char * exppatt, char * expreal, int lenreal, char * ptro, 
                   }
                   else
                   {
-                     lennew = ptr2 - ptr - 1;
+                     lennew = ( int ) ( ptr2 - ptr - 1 );
 
                      // Scanning all Markers in Repeatable group to check if Instanciated.
                      for( i = 0; i < lennew; i++ )
@@ -5489,7 +5492,7 @@ static void SearnRep( char * exppatt, char * expreal, int lenreal, char * ptro, 
                                  printf( "   '%s' Already instanciated\n", ptr + i );
                               #endif
 
-                              isdvig = ptr2 - ptro;
+                              isdvig = ( int ) ( ptr2 - ptro );
                               rezs = TRUE;
                            }
                         }
@@ -5598,7 +5601,7 @@ static void SearnRep( char * exppatt, char * expreal, int lenreal, char * ptro, 
                         // Ron Pinkas revised July-17-2004 - iResidualOffset already added to lenres in loop above.
                         *lenres += lennew;// + iResidualOffset;
 
-                        isdvig = ptr - ptro + ( ptr2 - ptr - 1 ) + lennew + iResidualOffset;
+                        isdvig = ( int ) ( ptr - ptro + ( ptr2 - ptr - 1 ) + lennew + iResidualOffset );
 
                         #ifdef DEBUG_MARKERS
                            printf( "   Instanciated Repeatable Group: >%s< with Non Repeatable >%s<\n", expnew, expreal );
@@ -6053,7 +6056,7 @@ int hb_pp_RdStr( FILE * handl_i, char * buffer, int maxlen, BOOL lDropSpaces, ch
 
     if( *iBuffer == *lenBuffer )
     {
-      if( (*lenBuffer = fread(sBuffer, 1, HB_PP_BUFF_SIZE, handl_i ) ) < 1 )
+      if( (*lenBuffer = ( int ) fread(sBuffer, 1, HB_PP_BUFF_SIZE, handl_i ) ) < 1 )
       {
         sBuffer[0] = '\n';
       }
@@ -6306,7 +6309,7 @@ int hb_pp_RdStr( FILE * handl_i, char * buffer, int maxlen, BOOL lDropSpaces, ch
 
 int hb_pp_WrStr( FILE * handl_o, char * buffer )
 {
-  int lens = strlen(buffer);
+  int lens = ( int ) strlen(buffer);
 
   HB_TRACE_STEALTH(HB_TR_DEBUG, ("hb_pp_WrStr(%p, >%s<)", handl_o, buffer ));
 
@@ -6770,7 +6773,7 @@ static int strincpy( char * ptro, char * ptri )
 
      *ptro = *ptri;
 
-     ptro++, ptri++, len++;
+     ptro++; ptri++; len++;
   }
 
   return len;
@@ -7943,7 +7946,7 @@ int hb_pp_NextToken( char** pLine, char *sToken )
       printf( "Token: >%s< Line: >%s<\n", sToken, *pLine );
    #endif
 
-   return nLen + iPad;
+   return ( int ) ( nLen + iPad );
 }
 
 char *strpbrkSkipStrings( const char* string, const char *strCharSet )

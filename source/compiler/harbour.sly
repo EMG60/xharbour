@@ -2544,6 +2544,7 @@ DecList    : %empty            {}
            | FormalList
            | OptList
            | FormalList ',' OptList
+           | EPSILON
            ;
 
 FormalList : IdentName AsType                                  { hb_compDeclaredParameterAdd( $1, hb_comp_cVarType ); }

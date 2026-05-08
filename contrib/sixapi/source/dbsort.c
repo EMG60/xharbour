@@ -156,7 +156,7 @@ HB_FUNC( __SX_DBSORT ) // (file,afields,bfor,bwhile,nnext,nrec,lrest,rdd,ldescen
          for( ui = 0; ui < uilenpArray; ui++ )
          {
             cFieldName = ( char * ) hb_arrayGetC( pArray, ui + 1 );
-            cFieldType = ( char * ) SX_CONVFUNC( sx_FieldType( ( PBYTE ) cFieldName ) );
+            cFieldType = ( char * ) ( LONG_PTR ) SX_CONVFUNC( sx_FieldType( ( PBYTE ) cFieldName ) );
 
             switch( *cFieldType )
             {
@@ -334,7 +334,7 @@ HB_FUNC( __SX_DBSORT ) // (file,afields,bfor,bwhile,nnext,nrec,lrest,rdd,ldescen
             )
             {
                ulRecNo = sx_RecNo();
-               if( ( nRecNo == ulRecNo ) )
+               if( nRecNo == ulRecNo )
                {
                   __sx_CopyRecord( cNewAlias, cSourceAlias );
                   break;
@@ -398,7 +398,7 @@ HB_FUNC( __SX_DBSORT ) // (file,afields,bfor,bwhile,nnext,nrec,lrest,rdd,ldescen
             while( _sx_Eval( pbCondition ) && ! sx_Eof() )
             {
                ulRecNo = sx_RecNo();
-               if( ( nRecNo == ulRecNo ) )
+               if( nRecNo == ulRecNo )
                {
                   __sx_CopyRecord( cNewAlias, cSourceAlias );
                   break;

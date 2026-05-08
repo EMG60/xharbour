@@ -4,17 +4,13 @@ rem
 rem $Id$
 rem
 rem FILE: make_pc.bat
-rem BATCH FILE FOR PELLESC
 rem
 rem This is Generic File, do not change it. If you should require your own build
 rem version, changes should only be made on your local copy.(AJ:2008-04-26)
 rem
 rem ============================================================================
-REM SET __MAKE__=D:\VC9\BIN\NMAKE.EXE
-REM NOTE: POMAKE 6.50 is buggy. In this case, please use NMAKE.EXE of MSVC.
-REM NOTE: POMAKE 7.00 is working fine
 
-REM SET HB_ARCH=64
+REM SET HB_ARCH=w64
 REM SET HB_OPTIMFLAGS=-gc3
 REM SET HB_DEBUG=d
 REM SET HB_GUI=1
@@ -32,53 +28,77 @@ REM SET HB_DIR_ADS=
 
 IF "%__MAKE__%"=="" SET __MAKE__=POMAKE
 
+REM Make that the current directory is the same as the batch file (root of xHarbour)
+CD %~dp0
 
-IF NOT "%CC_DIR%"=="" GOTO FIND_BISON
+SET "scriptName=%~n0"
+ECHO *** START [%~f0](%*) > winmake\functions.log
 
-:FIND_POCC
-   IF EXIST "%ProgramFiles%\PellesC" GOTO SET_POCC
-   IF EXIST \PellesC                 GOTO SET_POCC2
-   GOTO FIND_BISON
- 
-:SET_POCC
-   SET CC_DIR=%ProgramFiles%\PellesC
+:SET_CC
+   CALL winmake\find_pc.bat
+   IF ERRORLEVEL 99 GOTO ERROR_99
+   IF ERRORLEVEL  2 GOTO ABORTED
+   IF ERRORLEVEL  1 GOTO NOT_READY
+
    GOTO FIND_BISON
 
-:SET_POCC2
-   SET CC_DIR=\PellesC
-   GOTO FIND_BISON
+:ERROR_99
+   ECHO.
+   ECHO. ---------------------------------------
+   ECHO. Make Utility for %C_LONG_NAME%
+   ECHO. ---------------------------------------
+   ECHO.
+   ECHO. Unexpected error!
+   ECHO.
+   GOTO EXIT
+
+:ABORTED
+   ECHO.
+   ECHO. ---------------------------------------
+   ECHO. Make Utility for %C_LONG_NAME%
+   ECHO. ---------------------------------------
+   ECHO.
+   ECHO. Aborted by user.
+   ECHO.
+   GOTO EXIT
+
+:NOT_READY
+   ECHO.
+   ECHO. ---------------------------------------
+   ECHO. Make Utility for %C_LONG_NAME%
+   ECHO. ---------------------------------------
+   ECHO.
+   ECHO. %C_LONG_NAME% not found.
+   ECHO. Please install and try again.
+   ECHO.
+   GOTO EXIT
 
 :FIND_BISON
    IF NOT "%BISON_DIR%"=="" GOTO READY
-   IF EXIST "%ProgramFiles%\GnuWin32\Bin" GOTO SET_BISON1
-   IF EXIST \GnuWin32\Bin                 GOTO SET_BISON2 
-   GOTO READY
- 
-:SET_BISON1
-   SET BISON_DIR=%ProgramFiles%\GnuWin32\Bin
-   GOTO READY
-
-:SET_BISON2
-   SET BISON_DIR=\GnuWin32\Bin
+   CALL winmake\find_bison.bat
+   IF "%CC%"=="" GOTO NOT_READY
    GOTO READY
 
 :READY
+   REM NOT an error using $() synttax because it will be LATE expanded by make!
+   IF "%HB_GT_LIB%" == "" SET "HB_GT_LIB=$(GTWIN_LIB)"
 
-SET SUB_DIR=pc
-SET HB_GT_LIB=$(GTWIN_LIB)
+   REM echo "%CC_DIR%"
 
-echo "%CC_DIR%"
-echo "%RC_DIR%"
-SET _PATH=%PATH%
-SET PATH=%CC_DIR%\BIN;%BISON_DIR%;%PATH%
-echo %path%
+:SAVE_PATH
+   REM Save the original path before further modifications   
+   SET _PATH=%PATH%
+
 rem ============================================================================
 rem The followings should never change
 rem Do not hard-code in makefile because there are needed for clean build
 rem ============================================================================
-SET LIBEXT=%HB_ARCH%%HB_DEBUG%.lib
-SET OBJEXT=%HB_ARCH%%HB_DEBUG%.obj
+SET LIBEXT=%HB_DEBUG%.lib
+SET OBJEXT=%HB_DEBUG%.obj
 SET DIR_SEP=\
+REM POCC Specific.
+IF "%HB_ARCH%"=="w64" SET LIBEXT=%HB_DEBUG%.a
+IF "%HB_ARCH%"=="w64" SET OBJEXT=%HB_DEBUG%.o
 REM SET LIBPREFIX=
 rem ============================================================================
 
@@ -104,20 +124,22 @@ rem=============================================================================
 :BUILD
 rem=============================================================================
    SET __BLD__=CORE_BLD
+   SET HB_THREAD_SUPPORT=
    SET HB_MT=
    SET HB_MT_DIR=
    @CALL winmake\mdir.bat
-   %__MAKE__% /F winmake\makefile.pc >make_%SUB_DIR%.log
+   %__MAKE__% /F winmake\makefile.%C_SHORT_NAME% >make_%SUB_DIR%.log
    if errorlevel 1 goto BUILD_ERR
    if "%1"=="NOMT" goto BUILD_OK
    if "%1"=="nomt" goto BUILD_OK
    if "%2"=="NOMT" goto BUILD_OK
    if "%2"=="nomt" goto BUILD_OK
 
+   SET HB_THREAD_SUPPORT=1
    SET HB_MT=mt
    SET HB_MT_DIR=
    @CALL winmake\mdir.bat
-   %__MAKE__% /F winmake\makefile.pc >>make_%SUB_DIR%.log
+   %__MAKE__% /F winmake\makefile.%C_SHORT_NAME% >>make_%SUB_DIR%.log
    if errorlevel 1 goto BUILD_ERR
    goto BUILD_OK
 
@@ -146,10 +168,12 @@ rem=============================================================================
    rem We use HB_MT_DIR envar for DLL object folder here
    rem
    SET __BLD__=DLL_BLD
+   SET HB_THREAD_SUPPORT=
    SET HB_MT=
    SET HB_MT_DIR=\dll
+   REM SET HB_NO_VM_ALL=1
    @CALL winmake\mdir.bat dllcreate
-   %__MAKE__% /F winmake\makefile.pc >dll_%SUB_DIR%.log
+   %__MAKE__% /F winmake\makefile.%C_SHORT_NAME% >dll_%SUB_DIR%.log
    if errorlevel 1 goto DLL_ERR
    goto DLL_OK
 
@@ -175,10 +199,11 @@ rem=============================================================================
 :CONTRIBS
 rem=============================================================================
    SET __BLD__=CONTRIB_BLD
+   SET HB_THREAD_SUPPORT=
    SET HB_MT=
    SET HB_MT_DIR=
    @CALL winmake\mdir.bat
-   %__MAKE__% /F winmake\makefile.pc   >cont_%SUB_DIR%.log
+   %__MAKE__% /F winmake\makefile.%C_SHORT_NAME%   >cont_%SUB_DIR%.log
    if errorlevel 1 goto CONTRIBS_ERR
 
 
@@ -205,9 +230,9 @@ rem=============================================================================
 :SYNTAX
 rem=============================================================================
    ECHO.
-   ECHO. ------------------------
-   ECHO. Make Utility for PellesC
-   ECHO. ------------------------
+   ECHO. ---------------------------------------
+   ECHO. Make Utility for %C_LONG_NAME%
+   ECHO. ---------------------------------------
    @CALL winmake\mdir.bat howto
    goto EXIT
 
@@ -224,3 +249,5 @@ rem=============================================================================
 :EXIT
 rem=============================================================================
    @CALL winmake\mdir.bat resetenvar
+   set "scriptName="
+   ECHO *** END[%ERRORLEVEL%] [%~f0] >> winmake\functions.log

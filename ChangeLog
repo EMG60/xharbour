@@ -8,6 +8,1132 @@
    2002-12-01 23:12 UTC+0100 Foo Bar <foo.bar@foobar.org>
 */
 
+2026-05-04 19:56 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\tipssl\client.prg
+  * source\rtl\einstvar.prg
+  * source\rtl\ttable.prg
+  * source\rtl\win32ole.prg
+  * source\tip\client.prg
+  * tests\tbrowse.prg
+    ! moved oErr:Description assignments after oErr:GenCode to prevent message reset
+    ! removed redundant oErr:Description assignments
+
+2026-04-05 20:11 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source/compiler/harbour.sly
+  * source/compiler/harbouryy.c
+    ! added support for variadic METHOD declarations - refinement
+
+2026-04-05 19:22 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source/compiler/harbour.sly
+  * source/compiler/harbouryy.c
+    ! added support for variadic METHOD declarations
+      proper fix using harbour.sly and Bison
+
+2026-04-02 14:10 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source/compiler/harbour.sly
+  * source/compiler/harbouryy.c
+    ! added support for variadic METHOD declarations
+
+2026-01-03 11:14 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\vm\hvm.c
+    ! force MAIN() as startup procedure
+  * include\hbver.ch
+    * bumped to 2026
+
+2025-12-10 10:50 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\compiler\harbour.c
+    ! pacify warnings
+
+2025-12-09 21:13 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\compiler\harbour.c
+    ! fixed false warnings with BREAK and EXIT statements
+
+2025-12-05 19:32 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\pp\ppcore.c
+    ! pacify warnings
+
+2025-12-05 18:30 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\pp\ppcore.c
+    ! fixed wrong pp behaviour with [] string delimiters, thanks to Przemek!
+
+2025-10-22 11:50 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\rdd\dbf1.c
+    ! fixed wrong initialization to 0 of autoinc fields after ZAP
+
+2025-05-15 14:42 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\tip\client.prg
+  * contrib\tipssl\client.prg
+    * Reset of nRead to 0 in method Reset()
+
+2025-03-11 09:20 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * include\hbver.ch
+    * Bumped to 2025
+  * include/hbver.h
+    * Bumped to 1.3.2
+
+2025-02-25 15:48 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib/hbcurl/hbcurl.c
+    ! added support for HB_CURLOPT_MIMEPOST. Thanks to Antonio Linares!
+
+2025-02-19 16:47 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib/hbcurl/hbcurl.ch
+    ! updated with new definitions, borrowed from Harbour
+
+2025-02-15 22:10 UTC-0300  Luiz Rafael Culik <culikr/AT/gmail/com>
+  * xHarbourBuilder\xbuild.vc8.ini
+    ! update to last visual studio
+
+2025-02-15 18:45 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib/hbcurl/hbcurl.c
+    ! Pacified a warning
+
+2025-02-02 11:38 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib/hbcurl/hbcurl.c
+    ! Pacified a warning
+
+2025-02-02 08:42 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib/hbcurl/hbcurl.c
+    ! HB_CURLOPT_WRITEFUNCTION implemented. Thanks to Antonio Linares!
+
+2025-01-19 18:11 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source/vm/itemapi.c
+    ! Add HB_FINITE_DBL() new definition for __clang__ case. Thanks to Antonio Linares!
+
+2024-12-21 14:25 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.vc
+    ! Reenabled C++ compile mode for C modules (the final EXEs are smaller)
+
+2024-10-08 23:17 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbhpdf\hpdf_utils.c
+    ! Fixed crash in HPDF_FToA() with BCC32, borrowed from Harbour
+
+2024-10-03 13:01 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\ct\util.prg
+    ! Huge Occurs() speed improvement, borrowed from Harbour
+
+2024-09-24 20:20 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.vc
+    ! Disabled C++ compile mode for C modules
+
+2024-06-25 10:00 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * include\hbdefs.h
+    ! Exclude LONG_PTR and ULONG-PTR definition for MinGW compilers
+
+2024-06-24 21:20 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\rdd\dbcmd.c
+    ! Fixed __DBCOPY() function to honor SET DEFAULT path
+
+2024-05-15 20:20 UTC-0800 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * include/hbdefs.h
+    ! Added support for LONG_PTR and ULONG_PTR under #ifdef __GNUC__
+  * make_drw.sh
+    + Added support for unixodbc
+  * buildxbuilder.sh
+    ! Fixed to build on MacOs
+
+2024-04-13 12:20 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\compiler\harbour.c
+  * source\compiler\genc.c
+  * source\compiler\genhrb.c
+  * source\vm\runner.c
+  * source\rtl\tprinter.c
+    ! Fixed compiler warnings
+
+2024-04-13 10:31 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\common\hbver.c
+    ! Changed "ChangeLog SVN version" to "ChangeLog ID"
+    ! Changed "Harbour Build Info" to "xHarbour Build Info"
+
+2024-04-04 10:55 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * include\pragma.h
+    ! fixed for ADS 64 bit
+
+2024-03-26 09:44 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\tip\popcln.prg
+  * contrib\tipssl\popcln.prg
+    ! fixed method CountMail() which returned a wrong number
+
+2024-03-24 10:32 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\vm\pvalue.c
+    ! fixed second parameter behavior. Thanks to Richard Visscher!
+
+2024-03-05 14:38 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\rdd_ads\adsfunc.c
+    ! fixed compiler warnings
+
+2024-03-03 10:00 UTC-0300  Luiz Rafael Culik <culikr/AT/gmail/com>
+  * Makefile
+    ! added xHarbourBuilder folder
+  * xHarbourBuilder\Makefile
+    ! added xHarbour-SQLRDD and xHarbour-xBuild folder  for w32 build
+
+2024-02-29 14:00 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\rtl\dllcall.c
+    ! Fixed the previous commit
+
+2024-02-28 07:40 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * source\rtl\dllcall.c
+    ! Fixed to completly exclude if not Windows build
+    /* Please fix on Windows since I cannot test for few weeks */
+
+2024-02-14 19:36 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\rdd_ads\adsfunc.c
+    ! replace hb_parcx( 8 ) with hb_parni( 8 ) and hb_parcx( 9 ) with hb_parni( 9 )
+      in function HB_FUNC( ADSDDCREATEREFINTEGRITY )
+
+2024-01-26 23:50 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\rtl\dllcall.c
+    ! always define LoadLibrary(), FreeLibrary() and GetLastError() functions for Windows builds
+
+2024-01-21 09:52 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake/makefile.bc
+    ! removed -R- and -H- for bcc32c
+
+2024-01-20 17:09 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake/mdir.bat
+    ! added some missing %LIBPREFIX%
+
+2024-01-20 16:02 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake/mdir.bat
+    ! replace %HB_DEBUG%.lib with %LIBEXT%
+
+2024-01-20 14:10 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake/find_vc.bat
+    ! set HB_ARCH to w64 if ml64.exe does exist in MSC bin directory
+
+2024-01-20 11:25 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * make_bc.bat
+    ! set LIBEXT to .a and OBJEXT to .o for 64 bit
+
+2024-01-19 14:56 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.vc
+    ! added -wd4244 -wd4267 -wd4312 to CC_CMD_ZIP
+
+2024-01-19 11:05 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.vc
+    ! added -wd4834 to CC_CMD_ZIP
+
+2024-01-18 17:53 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+  * winmake/find_clng.bat
+  * winmake/find_pc.bat
+  * winmake/find_vc.bat
+    * Refinment - enclose CC_LONG_NAME in quotes to avoid issues with spaces in name
+
+2024-01-18 17:25 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    ! Fixed silly typos in last commit
+
+2024-01-18 08:48 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    * Moved reset of CC to _USER_CC from FIND_C_COMPILER to SET_C_COMPILER
+
+2024-01-17 18:07 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    * Reduced more nested IFs to GOTO to avoid parser bug in Windows batch files
+
+2024-01-17 15:38 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+   * Restored 2 missing resets of CC before calls found_cc.bat
+
+  * winmake/find_bc.bat
+  * winmake/find_clng.bat
+  * winmake/find_pc.bat
+  * winmake/find_vc.bat
+    * Corrcted line numbers in error messages
+
+2024-01-17 14:34 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+   * Few more reductions of nested IF to GOTO to avoid parser bug in Windows batch files
+   * Few simplifications to avoid redundant setting of CC
+
+  * winmake/find_bc.bat
+  * winmake/find_clng.bat
+  * winmake/find_pc.bat
+  * winmake/find_vc.bat
+    * Standardized _USER_CC to keep track of user defined CC
+
+2024-01-17 19:28 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * include\hbver.ch
+    * Bumped to 2024
+
+2024-01-17 09:03 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    + Added missing test when CC is set to DIR_SET64
+    
+2024-01-16 11:54 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    + Added _USER_CC to keep track of user defined CC
+    * Remove check if CC empty before ARCH check.
+    + Added reset of CC to _USER_CC at beginning of :FIND_C_COMPILER
+
+2024-01-15 20:15 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    * Defer setting of CC till found - Tentative fix for manual install of 64bit BCC 
+
+2024-01-15 10:05 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_vc.bat
+    * Tentative fix for manual install - skip ARCH check. 
+
+2024-01-14 23:20 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+  * winmake/find_clng.bat
+  * winmake/find_pc.bat
+  * winmake/find_vc.bat
+    * Converted an IF/ELSE to a GOTO to avoid parser bug in Windows batch files
+
+2024-01-14 22:10 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_vc.bat
+    * Minor fix to support manual MSC install pointed to by CC_DIR not having vsdevcmd.bat
+  * winmake/find_bc.bat
+  * winmake/find_clng.bat
+  * winmake/find_pc.bat
+    * Added 1 unexpected error message.
+
+2024-01-13 18:58 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    - Removed wrong premature reset of CC_DIR
+  * winmake/found_cc.bat
+    * Typo corrected clng -> clang
+    
+2024-01-13 00:32 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * make_bc.bat
+  * make_clng.bat
+  * make_gc.bat
+  * make_gc64.bat
+  * make_gnu.bat
+  * make_mingw.sh
+  * make_pc.bat
+  * make_vc.bat
+  * make_xc.bat
+  * winmake/find_bc.bat
+  * winmake/find_bison.bat
+  * winmake/find_pc.bat
+  * winmake/find_vc.bat
+  * winmake/found_cc.bat
+  * winmake/makefile.gc
+  * winmake/mdir.bat
+    * Cleanup and standardization
+
+  * winmake/functions.bat
+    * Renamed findInPath to rootOfAppInPath
+    + Added Right, findInString, isStrInPath, isPathInPath
+
+  + winmake/find_clng.bat
+  + winmake/known.clng
+    + Added auto detection support for MingW-CLang (work in progress)
+
+2024-01-11 01:55 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * bin/bld.bat
+    + Added support for MingW-CLang
+   
+2024-01-10 22:48 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * include/hbcomp.h
+  * source/compiler/harbour.c
+    * Renamed __INLINE to __XHBINLINE to avoid conflict with mingw-clang __INLINE
+
+  * source\common\hbarch.c
+    - Removed redundant #include "hbapi.h"
+    
+  * make_clng.bat
+  * winmake/common.mak
+  * winmake/compile.mak
+  * winmake/makefile.clng
+    * Finalizedd support for MingW-CLang - both 32 and 64 bit tested and working.
+
+    /*
+       I still intend to add find_clng.bat and model make_clng.bat after the new 
+       make_bc.bat make_pc.bat and make_vc.bat
+       Once properly tested I believe this should be our compiler of choice for Windows.
+     */
+
+2024-01-09 20:59 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * contrib/sixapi/source/dbcopy.c
+  * contrib/sixapi/source/dbdelim.c
+  * contrib/sixapi/source/dbeval.c
+  * contrib/sixapi/source/dbsort.c
+    - Removed redundant () to avoid compiler warning
+
+  * include/ctmath.h
+    - Added misssing void to avoid compiler warning
+  * include/hbdefs.h
+    + Added && ! defined(__clang__) to __BORLANDC__ if fix error under CLang based BCC
+  * source/common/hbdate.c
+    + Added () to cast to avoid compiler warning
+  * source/compiler/gencc.c
+    * Corrected format  specifier %hu to %hhu and %hd to %hhd to avoid compiler warning
+
+  * source/ct/ctnet.c
+  * source/compiler/gencobj.c
+  * source/rtl/hbwinole.c
+  * source/rtl/is.c
+  * source/rtl/win32prn.prg
+    - Removed UTF8 characters to avoid compiler warning
+
+  * source/vm/eval.c
+  * source/pp/ppgen.c
+    * Fixed ULL suffix tto use HB_ULL() macro
+
+  * utils/hbpp/hbppcore.c
+  * source/rtl/hbgtcore.c
+    * Corrected few commas to semicolons to avoid compiler warning
+
+  * source/rtl/hbsrlraw.c
+    * Corrected 1 HB_SIZE to HB_OFFSET to avoid compiler warning
+  * winmake/find_bc.bat
+    + !path! to !~path~ in .cfg file processing incasse patth has quotes
+
+  * winmake/find_bison.bat
+    + Added few more known locations for win_bison.exe
+
+  * make_gc64.bat
+    * Corrected HB_ARCH=64 to =w64
+
+  + winmake/makefile.clng
+  + make_clng.bat
+    + New files to support MingW-CLang (work in progress)
+
+2024-01-09 11:40 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * make_bc.bat
+    ! changed the name of the SUB_DIR: b32 and b64 instead of bc32 and bc64
+
+2024-01-08 19:04 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * include/hbver.h
+    * Bumped to 1.3.1
+
+2024-01-08 16:12 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.vc
+    ! reactivated build of gtwvg.lib, gtwvw.lib and xwt.lib in 64 bit
+
+2024-01-08 12:06 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\common3.mak
+    ! added NODLL when CC is bcc32c
+
+2024-01-06 21:26 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * make_bc.bat
+    + Added log of ERRORLEVEL on exit
+  * winmake/common3.mak
+    * Corrected HB_ARCH=64 to =w64
+  * winmake/find_bc.bat
+    + Added log of BCC_LIB on exit
+  * winmake/makefile.vc
+    - Removed redundant -DNODLL
+  
+2024-01-06 16:46 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    Moved BCC_LIB generation to :FOUND 
+
+2024-01-06 15:45 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    * Corrected HB_ARCH logic and simplified the IF to use GOTO to avoid nestedd IF
+
+2024-01-06 21:19 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\find_bc.bat
+    ! fixed IF/ELSE structure
+
+2024-01-06 13:50 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+  * winmake/find_pc.bat
+  * winmake/find_vc.bat
+    * Synched the latest modification of REM fix.
+
+2024-01-06 13:42 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    * Expanded complex IF to multi line for easier reading
+    * Modified REM that caused buggy batch parser to complain of CHECK_CC_DIR as non existent label
+
+2024-01-06 13:25 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+    * Modied REM that might affect buggy Windows batch parser
+
+2024-01-06 19:10 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.bc
+    ! removed -b compiler switch and corrected HB_ARCH "64" to "w64"
+
+2024-01-06 13:03 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/found_cc.bat
+    * Corrected BCC_LIB assignment to not use temp file
+    + Added debug output of BCC_LIB generation to functions.log
+
+2024-01-06 11:48 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/found_cc.bat
+    ! Fixed the test for xHarbour's bin in path to not use where. 
+
+2024-01-05 22:12 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/found_cc.bat
+    + Added () to help batch parser do its job.
+
+2024-01-05 18:18 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * make_bc.bat
+  * make_pc.bat
+  * make_vc.bat
+  * winmake/find_bc.bat
+  * winmake/find_pc.bat
+  * winmake/find_vc.bat
+  * winmake/found_cc.bat
+  * winmake/functions.bat
+    * Simplified, fixed reported issues and added debgging
+
+2024-01-04 19:36 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+  * winmake/found_cc.bat
+    + Added tentative support for bcc64 (not tested)
+  winmake/makefile.bc
+    * Corected support for BCC_LIB when empty
+    * Corrected few HB_ARCH=64 to =w64 
+  winmake/makefile.pc
+  winmake/makefile.vc
+    * Corrected few HB_ARCH=64 to =w64 
+
+2024-01-04 13:21 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_vc.bat
+    * Correction to support for manual MSC install pointed to by CC_DIR
+
+2024-01-04 12:50 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * winmake/find_bc.bat
+  * winmake/find_pc.bat
+    * Minor simplification optimized CHECKED_CC_DIR to be a GOTO instead of a CALL
+  * winmake/find_vc.bat
+    * Minor simplification optimized CHECKED_CC_DIR to be a GOTO instead of a CALL
+    + Added check for %CC_DIR%\bin\%CC%.exe in :DIR_SET
+
+2024-01-03 17:15 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * bin/bld.bat
+    + Added support for VS 64bit build (w64)
+
+2024-01-03 16:45 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  - bin/find_bc.bat
+  - bin/find_vc.bat
+  + winmake/find_bc.bat
+  + winmake/find_vc.bat
+    * Moved to winmake to avoid cluttering bin
+ 
+  * make_bc.bat
+  * make_dc.bat
+  * make_pc.bat
+  * make_vc.bat
+  * bin/bld.bat
+  * bin/bld_bc.bat
+  * bin/bld_vc.bat
+  * winmake/makefile.pc
+    * Modified to use new shared scripts
+
+  + winmake/find_bison.bat
+  + winmake/find_pc.bat
+  + winmake/found_cc.bat
+  + winmake/functions.bat
+    + New shared scripts to simplify updates and avoid redundancy
+
+  + winmake/known.bc
+  + winmake/known.pc
+  + winmake/known.vc
+   + New simple files to support auto detection of compilers and their respective paths
+
+  /* 
+    Make andd build batch files on Windows have been written from scratch to support
+    simplified auto detection of compilers and their respective paths. The system
+    is also shared not jusst between different compilers but also between make and build
+    batch files. This allows us to avoid redundancy and simplify updates. New compilers
+    can be added by simply adding a new known file and a new ssimple find script. Also
+    new known locations can be added to existing known files to support new versions of
+    existing compilers, without having to modify the make and build batch files.
+
+    Please note that Windows batch files are not very flexible and are somewhat
+    finicky. The new scripts are not perfect and may need some tweaking. Please
+    report any issues you may encounter.
+   *
+
+2023-12-30 11:55 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.bc
+    ! reactivated build of gtwvg.a, gtwvw.a and xwt.a
+
+  * makegc64.bat
+    ! revert assignment SET HB_ARCH=w64 to SET HB_ARCH=64
+
+2023-12-29 18:58 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.gc
+    ! reactivated build of libgtwvg64.a and libhbzip64.a
+
+2023-12-28 13:51 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\vm\eval.c
+  * contrib\gtwvw\gtwvw.c
+  * contrib\gtwvw\wvwdraw.c
+  * contrib\gtwvw\wvwmenu.c
+  * contrib\gtwvw\wvwtbar.c
+  * contrib\gtwvw\wvwstbar.c
+  * contrib\gtwvw\wvwpush.c
+  * contrib\gtwvw\wvwcheck.c
+  * contrib\gtwvw\wvwedit.c
+  * contrib\gtwvw\wvwfuncs.c
+  * contrib\xwt\src\xwt_win\xwt_win_framewnd.c
+  * contrib\gtwvg\gtwvg.c
+  * contrib\gtwvg\wvtcore.c
+  * contrib\gtwvg\wvtutils.c
+  * winmake\makefile.vc
+  * winmake\compile.mak
+    ! fixed compiler warnings
+
+  * contrib\gtwvg\wvtutils.c
+    ! replaced SetClassLong() with SetClassLongPtr()
+
+2023-12-27 13:21 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * bin/find_bc.bat
+    ! Fixed silly typo '&&' instead of '||'
+  * bin/find_vc.bat
+    ! Fixed silly typo '&&' instead of '||'
+    * Added support for xHarbour's bin path.
+
+  * bin/bld_bc.bat
+  * bin/bld_vc.bat 
+  * make_bc.bat
+  * make_vc.bat
+    - Removed redundant support for xHarbour's bin
+    
+2023-12-27 12:20 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * bin/find_bc.bat
+  * bin/find_vc.bat
+    * Fixed support of auto PATH setting for manual CC_DIR setup
+
+  * bin/bld_bc.bat
+  * bin/bld_vc.bat 
+  * make_bc.bat
+  * make_vc.bat
+    * Removed redundant checks of CC and CC_DIR
+
+2023-12-26 22:32 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * source\rtl\dllcall.c
+    * Fixed wrong nested structure of #ifdefs
+    ! Fixed #ifdef HB_OS_WIN_32 to add '&& ! defined( HB_OS_WIN_64 )'
+  * winmake/makefile.bc
+    + Added NODLL_FLAG set to -DNODLL when HB_ARCH==w64
+  + bin/find_vc.bat
+    + Added auto detection of %is_x64_arch% to set HB_ARCH to w64
+  * make_bc.bat
+  * make_gc64.bat
+  * make_pc.bat
+  * make_vc.bat
+    * Modified HB_ARCH=64 to w64   
+
+  /* 
+    With these changes opening a 'Developer Command Prompt for VS 2022'
+    (which opens a 64bit settings), calling our make_vc will succesfully build
+    a 64bit build.
+  */
+
+2023-12-26 19:18 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  + bin/find_vc.bat
+    * Added some ECHO to show detection steps and corrected LOCAL Labels to avoid duplicate labels
+    
+2023-12-26 19:57 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.bc
+    ! refinement for BCC64
+
+2023-12-26 11:41 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  + bin/find_bc.bat
+  + bin/find_vc.bat
+    + Added support for user defined PATH to BCC and MSVC
+  * winmake/makefile.bc
+    * Resttored Modified OPT_FLAGS of bcc32c (CLang does not support legacy optimization flags)
+
+2023-12-26 15:13 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\rtl\hbcrc32.c
+  * contrib\hbssl\evpciph.c
+  * contrib\hbssl\evpmd.c
+  * winmake\makefile.bc
+  * winmake\compile.mak
+    ! fixed compiler warnings
+
+2023-12-25 22:43 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * utils\misc\hbrc.c
+    ! Fixed compiler warnings
+
+  * tests/test.prg
+  * source/pp/ppgen.c
+    ! Fixed UL suffix in version constants to ULL
+
+2023-12-25 22:01 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  + bin/find_bc.bat
+  + bin/find_bison.bat
+  + bin/find_vc.bat
+    + Added new shared scripts to simplify updates and avoid redundancy 
+      They find the respective tools and set the respective environment variables
+
+  * make_bc.bat
+  * make_vc.bat
+  * bin/bld.bat
+  + bin/bld_bc.bat
+  * bin/bld_vc.bat
+    * Rewrote to use the new shared scripts
+    % Optimized to avoid redundant settings
+    ! Fixed to avoid duplicate setting of PATH
+    ! Fixed to correctly support side by side installations of BCC and MSVC with 
+      ability to switch between them without having to restart the shell.
+
+      /* 
+        Please fix/add all other make_<compiler>.bat and bld_<compiler>.bat
+        to follow the same logic/structure as make_bc.bat and bld_bc.bat
+
+        With minor modification to support CONTRIB libs we can now remove all Contrib's
+        specific bld_<compiler>.bat in favor of a single bld_<compiler>.bat
+       */
+
+  * bin/bld_b32.bat
+    * Now alias to bld_bc.bat
+  + make_b32.bat
+    + New alias to make_bc.bat
+
+  * winmake/mdir.bat
+    * Do not reset SUB_DIR
+    * Default LIBEXT to ".lib" if not set already set.
+
+  * tests/test.prg
+    * Corrected LL to UL in version constants
+ 
+2023-12-25 15:54 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\common\hbmem.c
+  * utils\misc\hbrc.c
+  * source\rtl\rat.c
+  * source\rtl\substr.c
+  * source\rtl\browdbx.prg
+  * source\rdd\dbf1.c
+  * source\rdd\dbf1net.c
+  * utils\hbpp\hbppcomp.c
+  * utils\hbpp\hbppcore.c
+  * contrib\sixapi\source\dbstru.c
+  * contrib\sixapi\source\decrypt.c
+  * contrib\sixapi\source\encrypt.c
+  * contrib\sixapi\source\eval.c
+  * contrib\sixapi\source\field.c
+  * contrib\sixapi\source\filter.c
+  * contrib\sixapi\source\get.c
+  * contrib\sixapi\source\index.c
+  * contrib\sixapi\source\put.c
+  * contrib\sixapi\source\rec.c
+  * contrib\sixapi\source\replace.c
+  * contrib\sixapi\source\sysprop.c
+  * contrib\sixapi\source\use.c
+  * contrib\sixapi\source\global.c
+  * include\hbiniseg.h
+  * winmake\makefile.vc
+  * winmake\compile.mak
+    ! fixed compiler warnings
+
+2023-12-25 11:07 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.vc
+  * winmake\compile.mak
+    ! fixed some improper use of the new macros CC_CMD_NOWARN and CCC_CMD_NOWARN
+
+2023-12-25 04:21 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * utils/misc/hbrc.c
+    unsigned long long -> ULONGLONG
+    
+  * source/compiler/hbstripl.c
+    * Move HB_SYMBOL_UNUSED() (executable context) below declaration
+
+  * make_bc.bat
+    + Added auto detection with auto setup of \BCC55 as SET_BCC_55
+    + Added auto detection with auto setup of C:\win_flex_bison-2.5.5 as 
+    + Added: IF "%CC%"=="bcc32c" SET SUB_DIR=b32c
+
+  * source/rdd/usrrdd/rdds/adordd/make_b32.bat
+  * source/rdd/usrrdd/rdds/adordd/makefile.bc
+  * tests/dll_b32.mak
+  * tests/dll_b32.bat
+    * modify hard coded b32 to %SUB_DIR% to differentiate between bcc32 (b32) and bcc32c (b32c)
+
+  * winmake/common3.mak
+    * Modified hard coded bison to $(BISON) to allow support for win_bison.exe
+  * winmake/makefile.bc
+    * Modified OPT_FLAGS of bcc32c to use same flags as bcc32
+  
+2023-12-24 20:53 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+* make_bc.bat
+    + Added auto detection with auto setup of C:\BCC55 as SET_BCC_C_55
+    + Completed auto setup to SET_BCC_55
+
+2023-12-24 20:46 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * include/hbapi.h
+  * source/compiler/comptool.c
+  * source/vm/cmdarg.c
+  * source/pp/ppgen.c
+    * Corrected hb_verCvsID() to return ULONGLONG instead of long long int 
+  * source/pp/ppgen.c
+    Corrected sufix of 64bit version constants from LL to UL 
+  
+2023-12-24 19:35 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.bc
+  * winmake\makefile.dc
+  * winmake\makefile.gc
+  * winmake\makefile.pc
+  * winmake\makefile.vc
+  * winmake\makefile.wc
+  * winmake\compile.mak
+    ! added new macros CC_CMD_NOWARN and CCC_CMD_NOWARN to silence contrib warnings
+
+  * contrib\gtwvw\gtwvw.c
+  * contrib\gtwvg\gtwvg.c
+  * contrib\tipssl\inetssl.c
+  * contrib\hbssl\ssl.c
+  * contrib\hbssl\sslctx.c
+    ! fixed compiler warnings
+
+2023-12-24 19:35 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\unicode\hbencode.c
+    ! fixed compiler warnings
+
+2023-12-24 10:44 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * utils\hbpp\hbppcore.c
+  * source\vm\hvm.c
+    ! fixed compiler warnings
+
+2023-12-24 01:08 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * make_drw.sh
+    + Added -Wno-documentation-unknown-command -Wno-c11-extensions -Wno-c++11-extensions
+
+2023-12-23 22:15 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * source/compiler/harbour.c
+    * Moved Warning generation block in hb_compFinalizeFunction() below the optimization block      
+      to avoid warning about unused variables assignment because usage code removed as a dead code by the optimizer
+
+2023-12-23 19:48 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * source/compiler/harbour.c
+    * Modified call to hb_compStripFuncLines() to be called on 'iPass > 0' instead of 'iPass == 2'
+      to fix stripping of line numbers for empty lines
+  * source/compiler/hbfix.c
+    + Added logic to hb_p_pushlocal() to convert to HB_P_NOOP if followed by HB_P_POP 
+      This optimizes out liness like this:
+         ( SomeLocal ) 
+  * source/compiler/hbstripl.c
+     + Added logic to skip HB_P_NOOPs when checking for empty lines
+  * tests/test.prg
+    ! Fixed compilation of C'LL suffix in versions constants
+  
+2023-12-23 10:56 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbhpdf\hpdf_shading.c
+    ! moved declaration to allow compilation with BCC32 non-CLANG
+
+2023-12-23 10:46 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbhpdf\hpdf_utils.c
+    ! removed inline declaration to allow compilation with BCC32 non-CLANG
+    
+2023-12-22 15:42 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\compiler\genc.c
+  * source\compiler\harbour.slx
+  * source\vm\classes.c
+  * source\vm\estack.c
+  * source\vm\hvm.c
+  * source\vm\cmdarg.c
+  * include\hbexprb.c
+  * include\simplex.c
+  * source\macro\macro.slx
+  * source\ct\disk.c
+  * contrib\tiff\tif_dir.c
+  * contrib\tiff\tif_dirread.c
+  * contrib\tiff\tif_getimage.c
+  * contrib\tiff\tif_print.c
+  * contrib\pdflite\pdflib\p_color.c
+  * contrib\png\png.c
+  * contrib\png\pngerror.c
+    ! fixed compiler warnings
+
+  * source\common\hbver.c
+  * source\vm\inet.c
+  * source\rtl\hbip.c
+  * source\rtl\hbsyslog.c
+  * source\rtl\tprinter.c
+  * source\rtl\hbping.c
+  * source\rtl\win32prn.prg
+  * source\rtl\winos.prg
+  * source\rtl\gtwin\gtwin.c
+  * source\rtl\gtwvt\gtwvt.c
+    ! suppress MSC 4996 compiler warning
+
+  * source\macro\macroyy.c
+    ! suppress MSC 4702 compiler warning
+
+2023-12-21 18:14 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * .gitignore
+    + Added *.tds, *.il?
+
+  * config/w32/bcc32.cf
+    * Default CC and LD to bcc32 only if NOT set already
+  
+  * make_bc.bat
+    + Added auto detection of C:\BCC102 Embarcadero Free BCC C++ 7.30 in CLANG mode (bcc32c.exe)
+
+  * tests/dll_b32.mak
+    * Default CC and LD to bcc32 only if NOT set already
+    + Add -L$(BCC_LIB)
+
+  * winmake/compile.mak
+    * Replace CC_CMD_HARU with existing CCC_CMD
+
+  * winmake/makefile.bc
+    * Default RC to rc.exe if CC is bcc32c
+    * Default CC only if not set already
+    - Remove '-d' from OPTFLAFGS (I suspect it was a typo)
+    + Added logic to set different flags for legacy bcc32 vs CLang based bcc32c
+    + Added -L$(BCC_LIB) to link commands. This allows build using auto detection 
+      User does not have to specify any setting to build with Free Embaracadero. 
+    * Alternate syntax when using brc32.exe vs. rc.exe
+
+  * winmake/makefile.vc
+    - Remove no longer needed CC_CMD_HARU
+  
+2023-12-20 14:22 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * .gitignore
+    + *.json
+  + contrib/hbhpdf/tests/.gitignore
+    + New for this dir 
+    + *.c
+
+  * bin/bld_vc.bat
+    + Added detection of VS2022
+    + Added assignment of respective __MSC__ version
+
+  * make_vc.bat
+    + Added assignment of respective __MSC__ version
+
+  * bin/bld.bat
+    + Added logic to default HB_INSTALL HB_BIN_INSTALL HB_LIB_INSTALL and HB_INC_INSTALL 
+      based on the directory from which bld.bat was loaded.
+    - Removed explicit HB_LIB_INSTALL for each library in MSVC section 
+    + Added /LIBPATH=%HB_LIB_INSTALL% to LDFLAGS in MSVC section
+    + Added libharu.lib hbhpdf.lib and png.lib to default libraries (if exist) in MSVC section
+    + Added enclosing "" around %HB_INC_INSTALL% in -I switch in MSVC section
+
+  * winmake/common.mak
+    + Added hpdf_direct and hpdf_shading to LIBHARU_LIB_OBJS
+  * winmake/makefile.vc
+    + Added CC_CMD_HARU
+  * winmake/compile.mak
+    + Added hpdf_direct and hpdf_shading to HBHPDF.LIB dependencies
+    * Changed HBHPDF.LIB dependencies to use CC_CMD_HARU instead of CC_CMD
+      to use C compilation instead of C++
+  * winmake/msvcerr.vc
+    + Added messages for __MSC__ 16 and 17
+  
+2023-12-19 19:12 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbhpdf
+    ! Reverted my recent changes
+
+2023-12-19 02:48 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * bin/hb-func.sh
+    * Replaced 'echo -n ...' with 'printf ...' to fix '-n' not supported by some shells
+  * bin/hb-mkslib.sh
+    ! Fixed (and simplified) .dylib creation
+
+2023-12-18 14:57 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\sevenzip\sevenzip.c
+  * contrib\hbhpdf\hpdf_streams.c
+  * contrib\hbhpdf\hpdf_image_png.c
+  * contrib\sixapi\source\base.c
+  * contrib\sixapi\source\dbcopy.c
+  * contrib\sixapi\source\dbdelim.c
+  * contrib\sixapi\source\dbsort.c
+  * source\rtl\filesys.c
+  * source\rtl\zlib\gzread.c
+  * source\rtl\zlib\gzwrite.c
+  * utils\hbpp\hbpp.c
+  * utils\hbpp\hbppcomp.c
+  * utils\hbpp\hbppcore.c
+  * utils\hbpp\pragma.c
+  * contrib\hbmxml\mxml_fil.c
+  * contrib\hbxdiff\xemit.c
+  * contrib\hbxdiff\xpatchi.c
+  * contrib\hbxdiff\xutils.c
+    ! fixed compiler warnings
+
+2023-12-17 23:09 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\pdflite\include\ft_font.h
+  * contrib\pdflite\pdflib\p_document.c
+  * contrib\pdflite\tiff\tif_unix.c
+  * utils\hbpp\hbppcore.c
+  * utils\hbpp\pragma.c
+    ! fixed compiler warnings
+
+2023-12-17 19:53 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbmxml\config.h
+  * contrib\hbxdiff\core.c
+  * contrib\hbsqlit3\sqlite3.c
+    ! fixed compiler warnings
+
+2023-12-17 19:29 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbhpdf\hpdf_fontdef_tt.c
+  * contrib\hbhpdf\hpdf_fontdef_type1.c
+  * contrib\hbhpdf\hpdf_fontdef_cid.c
+  * contrib\hbhpdf\hpdf_font_type1.c
+  * contrib\hbhpdf\hpdf_font_tt.c
+  * contrib\hbhpdf\hpdf_font_cid.c
+  * contrib\hbhpdf\hpdf_doc.c
+  * contrib\hbhpdf\hpdf_info
+  * contrib\hbhpdf\hpdf_catalog.c
+  * contrib\hbhpdf\hpdf_gstate.c
+  * contrib\hbhpdf\hpdf_pages.c
+  * contrib\hbhpdf\hpdf_page_operator.c
+  * contrib\hbhpdf\hpdf_annotation.c
+  * contrib\hbhpdf\hpdf_image.c
+  * contrib\hbhpdf\hpdf_image_png.c
+  * contrib\hbhpdf\hpdf_doc_png.c
+  * contrib\hbhpdf\hpdf_namedict.c
+  * contrib\hbhpdf\hpdf_pdfa.c
+  * contrib\hbhpdf\hpdf_encoder_utf.c
+  * contrib\hbhpdf\hpdf_image_ccitt.c
+    ! fixed compiler warnings
+
+2023-12-17 16:10 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbbz2\bzlib_pr.h
+  * contrib\hbhpdf\hpdf_utils.c
+  * contrib\hbhpdf\hpdf_objects.c
+  * contrib\hbhpdf\hpdf_null.c
+  * contrib\hbhpdf\hpdf_boolean.c
+  * contrib\hbhpdf\hpdf_number.c
+  * contrib\hbhpdf\hpdf_real.c
+  * contrib\hbhpdf\hpdf_name.c
+  * contrib\hbhpdf\hpdf_array.c
+  * contrib\hbhpdf\hpdf_dict.c
+  * contrib\hbhpdf\hpdf_encoder.c
+  * contrib\hbhpdf\hpdf_string.c
+  * contrib\hbhpdf\hpdf_binary.c
+  * contrib\hbhpdf\hpdf_encryptdict.c
+    ! fixed compiler warnings
+
+2023-12-17 13:17 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbhpdf\harupdf.c
+    ! fixed compiler warnings
+
+2023-12-17 12:58 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbhpdf\hpdf_utils.c
+    ! fixed MSC compiler warnings
+
+2023-12-17 11:27 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbhpdf\hpdf_utils.c
+    ! replace modff() with modf() and fixed a wrong C++ declaration
+
+2023-12-16 19:00 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\rtl\zlib\gzread.c
+  * contrib\tiff\tif_config.h
+  * contrib\tiff\tif_compress.c
+    ! fixed compiler warnings
+
+2023-12-14 01:12 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * config/linux/gcc.cf
+    * Set USE_FPIC for aarch64
+     
+  * contrib/hbhpdf
+    * Updated to 2.4.4
+    * Makefile
+      + added missing source filesd and corrected sorting
+
+2023-12-13 22:36 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * source/pp/ppgen.c
+    ! Fixed hb_pp_parseChangelog() to support UTC+ as well as UTC- timezones
+    ! Fixed hb_pp_parseChangelog() to support /r/n as well as /n line endings
+    * Modified hb_pp_parseChangelog() to expect the UTC marker to be at position 17 instead of >= 17
+     
+2023-11-23 14:00 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * source\codepage\cptrwin.c
+    ! fixed charset (borrowed from Harbour)
+
+2023-11-19 17:25 UTC-0300  Luiz Rafael Culik <culikr/AT/gmail/com>
+  ! winmake\common.mak
+  ! winmake\common1.mak
+  ! winmake\compile.mak
+  ! winmake\mdir.bat
+    + Support to build hbzebra
+	
+2023-11-19 11:20 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbcurl\hbcurl.c
+    ! fixed hb_curl_xfree() to avoid error with null pointer
+
+2023-11-15 13:11 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * make_bc.bat
+    ! change end of line character from LF to CRLF to fix the wrong execution of GOTO statements
+
+2023-11-10 17:23 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * make_vc.bat
+    ! change the name of the SUB_DIR: vc32 and vc64 instead of vc
+
+2023-11-08 19:22 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * contrib\hbssl\pem.c
+    ! fixed compilation with BCC64
+
+2023-11-07 16:28 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\makefile.bc
+    ! fixed compilation warning flags of hbzip library with BCC64
+
+2023-11-07 11:53 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * winmake\common1.mak
+    ! fixed compilation of curl contrib library
+
+2023-11-04 12:26 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+   * xbscript.prg
+   * xbs_harb.ch
+     ! Guard DESTRUCTOR Finalize with #ifndef __CONCILE_PCODE__ to avoid duplicate release!
+     ! Fixed PP_Cleanup() to release Dynamic Procedures in reverse order!
+     
+2023-11-04 11:53 UTC+0100 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
+  * make_gc.bat
+  * make_gc64.bat
+  * winmake\makefile.gc
+    ! fixed compilation with MinGW 32-bit and 64-bit
+
+2023-11-03 00:16 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+   * include/hbapigt.h
+     ! Guard codepage comment with #if 0 to fix compiler warnings.
+
+2023-11-02 13:48 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+   - utils/xbscript
+     - Removed utils/xbscript directory and replaced it with a link
+       to a stand alone repository of xbScript as a submodule. 
+   
+   Instructions for Existing Clones:
+    1. Pull Latest Changes: First, git pull
+    2. Ensure the old utils/xbscript directory is completley removed since it likely had a sub folder for you platform
+    3. Now, you can initialize and fetch the content of the submodule:
+        git submodule update --init --recursive 
+        
+  Instructions for New Clones - ADD the git flag --recurse-submodules as follows:  
+    git clone --recurse-submodules https://github.com/xHarbour-org/xharbour.git
+
+2023-11-01 22:02 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+   * utils/xbscript/xbs_harb.ch
+     * Corrected typo #idef -> #ifdef
+
+2023-11-01 21:02 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+   * utils/xbscript/xbs_harb.ch
+     + Added #define HB_LEGACY_TYPES_ON for Harbour compilation
+
+2023-11-01 19:45 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+   * utils/xbscript/xbscript.prg
+     + Added: #xuntranslate THROW before FUNCTION Throw() and restore the #xtranslate after to fix Harbour compilation
+
+2023-11-01 15:24 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+   * utils/xbscript/xbscript.prg
+     + Added: #include "hbcompat.ch" when compiled under Harbour
+
+2023-10-26 22:00 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * .gitignore
+    + Added contrib generated files
+  * buildxbuilder.sh
+    Linux: /usr -> /usr/local  
+  * contrib/Makefile
+    + Added gd to DIRS
+
+2023-10-23 22:34 UTC-0500 Ron Pinkas <ronpinkas/AT/gmail/com>
+  * make_drw.sh
+    * Improved to use dynamicly extract from brew the path for zlib and and openssl
+  * make_macosx.sh
+    * Modified to source ./make_drw.sh
+
+2023-10-13 11:00 UTC-0300  Luiz Rafael Culik <culikr/AT/gmail/com>
+  ! buildxbuilder.sh
+    !updated to not build gtcrs and gtsln
+  ! xHarbourBuilder/xHarbour-xBuild/tproject.prg 
+    ! updated to not link by default -lncurses -lslang and -lgpm under linux
+  ! contrib/hbzlib/Include/zipcollections.h
+    ! update to compile under gcc>= 4
+
 2023-09-20 17:30 UTC-0300  Luiz Rafael Culik <culikr/AT/gmail/com>
   + buildxbuilder.sh
     ! shell script to build xharbour/contribs/xbuild and sqlrdd under linux
@@ -1121,7 +2247,7 @@
 
 2017-09-02 23:08 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
   * contrib/hbhpdf/harupdf.c
-    ! added setting date.ind to space in function HPDF_SETINFODATEATTR (many thanks to Mario Sim�es Filho)
+    ! added setting date.ind to space in function HPDF_SETINFODATEATTR (many thanks to Mario Simï¿½es Filho)
 
 2017-08-27 00:33 UTC+0200 Enrico Maria Giordano <e.m.giordano@emagsoftware.it>
   * contrib/tipssl/client.prg
@@ -2228,7 +3354,7 @@
 2015-01-29 08:25 UTC+0200 Saulius Zrelskis <labitas/AT/gmail/com>
   * contrib/hbsqlit3/xhbsqlite3.c
     + add function HB_FUNC( SQLITE3_LOAD_EXTENSION )
-      addendum by C�sar Lozada
+      addendum by Cï¿½sar Lozada
 
 2015-01-14 14:55 UTC+0200 Saulius Zrelskis <labitas/AT/gmail/com>
   * source/rtl/pcre/config.generic.h
@@ -3080,7 +4206,7 @@
 
 2014-05-19 13:55 UTC+0200 Saulius Zrelskis <labitas/AT/gmail/com>
   * source/tip/encoding/base64.c
-    ! fixed memory leak & bug reported by Mario Sim�es Filho
+    ! fixed memory leak & bug reported by Mario Simï¿½es Filho
 
 2014-05-10 13:50 UTC-300 Luiz Rafael Culik <luiz/AT/xharbour/com/br>
   * source/rtl/win_misc.c
@@ -10522,7 +11648,7 @@
      ! Minox Fix im compilation under linux
 
 2011-12-15 10:40 UTC-0300 Luiz Rafael Culik <luiz at xharbour.com.br>
-   * source/t�p/sendmail.prg
+   * source/tï¿½p/sendmail.prg
      ! fixed Disposition-Notification-To field
 
 2011-11-27 22:40 UTC-0300 Luiz Rafael Culik <luiz at xharbour.com.br>
@@ -17599,4 +18725,9 @@
     then copy gmail.pem to 7f549ca4.0
     under linux
     execute the c_rehash command
-   
+
+
+
+
+
+

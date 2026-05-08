@@ -64,6 +64,7 @@ rem=============================================================================
 rem=============================================================================
 ECHO System Files Succesfully Built ...
 ECHO Copying System Files to BIN and LIB Folders ...
+if "%LIBEXT%"=="" set LIBEXT=".lib
 if exist bin\ppgen.exe           del   bin\ppgen.exe
 if exist bin\%SUB_DIR%\ppgen.exe del   bin\%SUB_DIR%\ppgen.exe
 if exist bin\%SUB_DIR%\*.exe     copy  bin\%SUB_DIR%\*.exe bin /D /Y > nul
@@ -80,14 +81,14 @@ rem=============================================================================
 ECHO DLL Files Succesfully Built ...
 ECHO Copying DLL Files to BIN Folder ...
 if exist hdll.tmp del hdll.tmp
-if exist bin\%SUB_DIR%\xharbour%HB_DEBUG%.lib    copy bin\%SUB_DIR%\xharbour%HB_DEBUG%.lib     lib           > nul
-if exist bin\%SUB_DIR%\xharbour%HB_DEBUG%.lib    copy bin\%SUB_DIR%\xharbour%HB_DEBUG%.lib     lib\%SUB_DIR% > nul
-if exist bin\%SUB_DIR%\xharbour%HB_DEBUG%.dll    copy bin\%SUB_DIR%\xharbour%HB_DEBUG%.dll     bin           > nul
-if exist bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.exe    copy bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.exe    bin           > nul
-if exist bin\%SUB_DIR%\hbmakedll%HB_DEBUG%.exe   copy bin\%SUB_DIR%\hbmakedll%HB_DEBUG%.exe   bin           > nul
-if exist bin\%SUB_DIR%\hbrundll%HB_DEBUG%.exe    copy bin\%SUB_DIR%\hbrundll%HB_DEBUG%.exe    bin           > nul
-if exist bin\%SUB_DIR%\hbtestdll%HB_DEBUG%.exe   copy bin\%SUB_DIR%\hbtestdll%HB_DEBUG%.exe   bin           > nul
-if exist bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.exe copy bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.exe bin           > nul
+if exist bin\%SUB_DIR%\%LIBPREFIX%xharbour%LIBEXT% copy bin\%SUB_DIR%\%LIBPREFIX%xharbour%LIBEXT% lib           > nul
+if exist bin\%SUB_DIR%\%LIBPREFIX%xharbour%LIBEXT% copy bin\%SUB_DIR%\%LIBPREFIX%xharbour%LIBEXT% lib\%SUB_DIR% > nul
+if exist bin\%SUB_DIR%\xharbour%HB_DEBUG%.dll      copy bin\%SUB_DIR%\xharbour%HB_DEBUG%.dll      bin           > nul
+if exist bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.exe      copy bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.exe      bin           > nul
+if exist bin\%SUB_DIR%\hbmakedll%HB_DEBUG%.exe     copy bin\%SUB_DIR%\hbmakedll%HB_DEBUG%.exe     bin           > nul
+if exist bin\%SUB_DIR%\hbrundll%HB_DEBUG%.exe      copy bin\%SUB_DIR%\hbrundll%HB_DEBUG%.exe      bin           > nul
+if exist bin\%SUB_DIR%\hbtestdll%HB_DEBUG%.exe     copy bin\%SUB_DIR%\hbtestdll%HB_DEBUG%.exe     bin           > nul
+if exist bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.exe   copy bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.exe   bin           > nul
 ECHO Done ...
 ECHO.
 goto EXIT
@@ -147,7 +148,7 @@ if exist lib\%SUB_DIR%\%LIBPREFIX%telepath%LIBEXT% copy lib\%SUB_DIR%\%LIBPREFIX
 if exist lib\%SUB_DIR%\%LIBPREFIX%tiff%LIBEXT%     copy lib\%SUB_DIR%\%LIBPREFIX%tiff%LIBEXT%     lib >NUL
 if exist lib\%SUB_DIR%\%LIBPREFIX%tipssl%LIBEXT%   copy lib\%SUB_DIR%\%LIBPREFIX%tipssl%LIBEXT%   lib >NUL
 if exist lib\%SUB_DIR%\%LIBPREFIX%xwt%LIBEXT%      copy lib\%SUB_DIR%\%LIBPREFIX%xwt%LIBEXT%      lib >NUL
-
+if exist lib\%SUB_DIR%\%LIBPREFIX%hbzebra%LIBEXT%  copy lib\%SUB_DIR%\%LIBPREFIX%hbzebra%LIBEXT%   lib >NUL
 ECHO Done ...
 ECHO.
 goto EXIT
@@ -348,6 +349,7 @@ if exist lib\%LIBPREFIX%xwt%LIBEXT%                  del lib\%LIBPREFIX%xwt%LIBE
 if exist lib\%LIBPREFIX%zlib%LIBEXT%                 del lib\%LIBPREFIX%zlib%LIBEXT%
 if exist lib\%LIBPREFIX%*.bak                        del lib\%LIBPREFIX%*.bak
 if exist lib\%LIBPREFIX%*%OBJEXT%                    del lib\%LIBPREFIX%*%OBJEXT%
+if exist lib\%LIBPREFIX%hbzebra%LIBEXT%              del lib\%LIBPREFIX%hbzebra%LIBEXT%
 
 if exist bin\*%HB_DEBUG%.tds                         del bin\*%HB_DEBUG%.tds
 if exist bin\*%HB_DEBUG%.map                         del bin\*%HB_DEBUG%.map
@@ -502,15 +504,15 @@ if exist bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.map     del bin\%SUB_DIR%\xbscriptd
 if exist bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.tds     del bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.tds
 
 if exist bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.exp       del bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.exp
-if exist bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.lib       del bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.lib
+if exist bin\%SUB_DIR%\hbdocdll%LIBEXT%             del bin\%SUB_DIR%\hbdocdll%LIBEXT%
 if exist bin\%SUB_DIR%\hbrundll%HB_DEBUG%.exp       del bin\%SUB_DIR%\hbrundll%HB_DEBUG%.exp
-if exist bin\%SUB_DIR%\hbrundll%HB_DEBUG%.lib       del bin\%SUB_DIR%\hbrundll%HB_DEBUG%.lib
+if exist bin\%SUB_DIR%\hbrundll%LIBEXT%             del bin\%SUB_DIR%\hbrundll%LIBEXT%
 if exist bin\%SUB_DIR%\hbtestdll%HB_DEBUG%.exp      del bin\%SUB_DIR%\hbtestdll%HB_DEBUG%.exp
-if exist bin\%SUB_DIR%\hbtestdll%HB_DEBUG%.lib      del bin\%SUB_DIR%\hbtestdll%HB_DEBUG%.lib
+if exist bin\%SUB_DIR%\hbtestdll%LIBEXT%            del bin\%SUB_DIR%\hbtestdll%LIBEXT%
 if exist bin\%SUB_DIR%\hbmakedll%HB_DEBUG%.exp      del bin\%SUB_DIR%\hbmakedll%HB_DEBUG%.exp
-if exist bin\%SUB_DIR%\hbmakedll%HB_DEBUG%.lib      del bin\%SUB_DIR%\hbmakedll%HB_DEBUG%.lib
+if exist bin\%SUB_DIR%\hbmakedll%LIBEXT%            del bin\%SUB_DIR%\hbmakedll%LIBEXT%
 if exist bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.exp    del bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.exp
-if exist bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.lib    del bin\%SUB_DIR%\xbscriptdll%HB_DEBUG%.lib
+if exist bin\%SUB_DIR%\xbscriptdll%LIBEXT%          del bin\%SUB_DIR%\xbscriptdll%LIBEXT%
 
 if exist bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.ilc       del bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.ilc
 if exist bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.ild       del bin\%SUB_DIR%\hbdocdll%HB_DEBUG%.ild
@@ -558,7 +560,6 @@ if exist lib\%SUB_DIR%\%LIBPREFIX%gtwvg%LIBEXT%     del lib\%SUB_DIR%\%LIBPREFIX
 if exist lib\%SUB_DIR%\%LIBPREFIX%gtwvt%LIBEXT%     del lib\%SUB_DIR%\%LIBPREFIX%gtwvt%LIBEXT%
 if exist lib\%SUB_DIR%\%LIBPREFIX%gtwvw%LIBEXT%     del lib\%SUB_DIR%\%LIBPREFIX%gtwvw%LIBEXT%
 if exist lib\%SUB_DIR%\%LIBPREFIX%harbour%LIBEXT%   del lib\%SUB_DIR%\%LIBPREFIX%harbour%LIBEXT%
-if exist lib\%SUB_DIR%\%LIBPREFIX%harbour-debug.lib del lib\%SUB_DIR%\%LIBPREFIX%harbour-debug.lib
 if exist lib\%SUB_DIR%\%LIBPREFIX%hbbtree%LIBEXT%   del lib\%SUB_DIR%\%LIBPREFIX%hbbtree%LIBEXT%
 if exist lib\%SUB_DIR%\%LIBPREFIX%hbbz2%LIBEXT%     del lib\%SUB_DIR%\%LIBPREFIX%hbbz2%LIBEXT%
 if exist lib\%SUB_DIR%\%LIBPREFIX%hbcab%LIBEXT%     del lib\%SUB_DIR%\%LIBPREFIX%hbcab%LIBEXT%
@@ -601,6 +602,7 @@ if exist lib\%SUB_DIR%\%LIBPREFIX%telepath%LIBEXT%  del lib\%SUB_DIR%\%LIBPREFIX
 if exist lib\%SUB_DIR%\%LIBPREFIX%tiff%LIBEXT%      del lib\%SUB_DIR%\%LIBPREFIX%tiff%LIBEXT%
 if exist lib\%SUB_DIR%\%LIBPREFIX%tipssl%LIBEXT%    del lib\%SUB_DIR%\%LIBPREFIX%tipssl%LIBEXT%
 if exist lib\%SUB_DIR%\%LIBPREFIX%xwt%LIBEXT%       del lib\%SUB_DIR%\%LIBPREFIX%xwt%LIBEXT%
+if exist lib\%SUB_DIR%\%LIBPREFIX%hbzebra%LIBEXT%    del lib\%SUB_DIR%\%LIBPREFIX%hbzebra%LIBEXT%
 
 IF EXIST make_%SUB_DIR%.log                         del make_%SUB_DIR%.log
 IF EXIST dll_%SUB_DIR%.log                          del dll_%SUB_DIR%.log
@@ -637,7 +639,7 @@ rem=============================================================================
 rem=============================================================================
 rem SET CC_DIR=
 rem SET BISON_DIR=
-SET SUB_DIR=
+rem SET SUB_DIR=
 SET HB_GT_LIB=
 SET LIBEXT=
 SET OBJEXT=
@@ -648,13 +650,14 @@ set PATH=!_PATH:"=^"!
 endlocal
 SET _PATH=
 
-IF NOT "%LIBPREFIX%"=="" SET LIBPREFIX=
-IF NOT "%_PATH%"    =="" SET _PATH=
-IF NOT "%HB_MT%"    =="" SET HB_MT=
-IF NOT "%HB_MT_DIR%"=="" SET HB_MT_DIR=
-IF NOT "%MAKEALL%"  =="" SET MAKEALL=
-IF NOT "%MAKE_EXE%" =="" SET MAKE_EXE=
-IF NOT "%__BLD__%"  =="" SET __BLD__=
+SET LIBPREFIX=
+SET _PATH=
+SET HB_MT=
+SET HB_MT_DIR=
+SET MAKEALL=
+SET MAKE_EXE=
+SET __BLD__=
+SET __MAKE__=
 
 rem=============================================================================
 :EXIT

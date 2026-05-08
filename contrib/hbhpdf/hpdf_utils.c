@@ -15,6 +15,7 @@
  *
  */
 
+#include <math.h>
 #include <stdlib.h>
 #include "hpdf_utils.h"
 #include "hpdf_consts.h"
@@ -31,8 +32,8 @@ HPDF_AToI  (const char  *s)
         return 0;
     }
 
-    /* increment pointer until the charactor of 's' is not
-     * white-space-charactor.
+    /* increment pointer until the character of 's' is not
+     * white-space-character.
      */
     while (*s) {
         if (HPDF_IS_WHITE_SPACE(*s))
@@ -67,8 +68,8 @@ HPDF_AToF  (const char  *s)
     HPDF_DOUBLE v;
     HPDF_INT tmp = 1;
 
-    /* increment pointer until the charactor of 's' is not
-     * white-space-charactor.
+    /* increment pointer until the character of 's' is not
+     * white-space-character.
      */
     while (*s) {
         if (HPDF_IS_WHITE_SPACE(*s))
@@ -440,5 +441,5 @@ HPDF_UInt16Swap  (HPDF_UINT16  *value)
     HPDF_BYTE u[2];
 
     HPDF_MemCpy (u, (HPDF_BYTE*)value, 2);
-    *value = (HPDF_UINT16)(((HPDF_UINT16)u[0] << 8) | (HPDF_UINT16)u[1]);
+    *value = (HPDF_UINT16)((HPDF_UINT16)u[0] << 8 | (HPDF_UINT16)u[1]);
 }

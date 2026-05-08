@@ -3,10 +3,12 @@ APPEXE       = $(PRGFILE).exe
 COBJFLAGS    = -DHB_FM_STATISTICS_OFF -O2 -OS -6 -c -tW -I..\INCLUDE -d -w3
 HARBOURFLAGS = -n -i..\include -w1
 INCLUDEDIR   = ..\include
+ifeq ($(CC),)
 CC           = bcc32.exe
+endif
 ILINK_EXE    = ilink32.exe
-COMPILER     = ..\bin\b32\harbour.exe
-HARBOURLIB   = ..\lib\b32
+COMPILER     = ..\bin\%SUB_DIR%\harbour.exe
+HARBOURLIB   = ..\lib\%SUB_DIR%
 MAINWIN      = ..\SOURCE\VM\MAINWIN.C
 
 $(APPEXE) : $(OBJDIR)\$(PRGFILE).obj \
@@ -21,7 +23,7 @@ $(APPEXE) : $(OBJDIR)\$(PRGFILE).obj \
    echo ws2_32.lib + >> b32.bc
    echo cw32.lib + >> b32.bc
    echo import32.lib, >> b32.bc
-   @$(ILINK_EXE) -ap -Tpe -Gn @b32.bc
+   @$(ILINK_EXE) -ap -Tpe -Gn -L$(BCC_LIB) @b32.bc
 
 $(OBJDIR)\$(PRGFILE).c : $(PRGFILE).prg
    $(COMPILER) $(HARBOURFLAGS) $** -o$@

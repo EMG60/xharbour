@@ -93,78 +93,78 @@ $(OBJ_DIR)$(DIR_SEP)hbver$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)hbver.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hbver.c : include$(DIR_SEP)hbver.h
-	$(TYPE) $(COMMON_DIR)$(DIR_SEP)hbver.c > $(OBJ_DIR)$(DIR_SEP)hbver.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)hbver.cxx $(OBJ_DIR)$(DIR_SEP)hbver.c
+	$(TYPE) $(COMMON_DIR2)\hbver.c > $(OBJ_DIR)$(DIR_SEP)hbver.cxx
+	$(COPY) $(OBJ_DIR2)\hbver.cxx $(OBJ_DIR2)\hbver.c
 
 $(OBJ_DIR)$(DIR_SEP)cmdarg$(HB_MT)$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)cmdarg.c
 	$(CC_CMD_HARBOUR)
 
 $(OBJ_DIR)$(DIR_SEP)cmdarg.c : ChangeLog
-	$(TYPE) $(VM_DIR)$(DIR_SEP)cmdarg.c > $(OBJ_DIR)$(DIR_SEP)cmdarg.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)cmdarg.cxx $(OBJ_DIR)$(DIR_SEP)cmdarg.c
+	$(TYPE) $(VM_DIR2)\cmdarg.c > $(OBJ_DIR)$(DIR_SEP)cmdarg.cxx
+	$(COPY) $(OBJ_DIR2)\cmdarg.cxx $(OBJ_DIR2)\cmdarg.c
 
 $(OBJ_DIR)$(DIR_SEP)comptool$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)comptool.c
 	$(CC_CMD_HARBOUR)
 
 $(OBJ_DIR)$(DIR_SEP)comptool.c : ChangeLog
-	$(TYPE) $(COMPILER_DIR)$(DIR_SEP)comptool.c > $(OBJ_DIR)$(DIR_SEP)comptool.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)comptool.cxx $(OBJ_DIR)$(DIR_SEP)comptool.c
+	$(TYPE) $(COMPILER_DIR2)\comptool.c > $(OBJ_DIR)$(DIR_SEP)comptool.cxx
+	$(COPY) $(OBJ_DIR2)\comptool.cxx $(OBJ_DIR2)\comptool.c
 
 $(OBJ_DIR)$(DIR_SEP)expropta$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)expropta.c
 	$(CC_CMD_HARBOUR)
 
 $(OBJ_DIR)$(DIR_SEP)expropta.c : $(INCLUDE_DIR2)$(DIR_SEP)hbexpra.c
-	$(TYPE) $(COMPILER_DIR)$(DIR_SEP)expropta.c > $(OBJ_DIR)$(DIR_SEP)expropta.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)expropta.cxx $(OBJ_DIR)$(DIR_SEP)expropta.c
+	$(TYPE) $(COMPILER_DIR2)\expropta.c > $(OBJ_DIR)$(DIR_SEP)expropta.cxx
+	$(COPY) $(OBJ_DIR2)\expropta.cxx $(OBJ_DIR2)\expropta.c
 
 $(OBJ_DIR)$(DIR_SEP)exproptb$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)exproptb.c
 	$(CC_CMD_HARBOUR)
 
 $(OBJ_DIR)$(DIR_SEP)exproptb.c : $(INCLUDE_DIR2)$(DIR_SEP)hbexprb.c
-	$(TYPE) $(COMPILER_DIR)$(DIR_SEP)exproptb.c > $(OBJ_DIR)$(DIR_SEP)exproptb.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)exproptb.cxx $(OBJ_DIR)$(DIR_SEP)exproptb.c
+	$(TYPE) $(COMPILER_DIR2)\exproptb.c > $(OBJ_DIR)$(DIR_SEP)exproptb.cxx
+	$(COPY) $(OBJ_DIR2)\exproptb.cxx $(OBJ_DIR2)\exproptb.c
 
 $(OBJ_DIR)$(DIR_SEP)exproptc$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)exproptc.c
 	$(CC_CMD_HARBOUR)
 
 $(OBJ_DIR)$(DIR_SEP)exproptc.c : $(INCLUDE_DIR2)$(DIR_SEP)hbexprc.c
-	$(TYPE) $(COMPILER_DIR)$(DIR_SEP)exproptc.c > $(OBJ_DIR)$(DIR_SEP)exproptc.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)exproptc.cxx $(OBJ_DIR)$(DIR_SEP)exproptc.c
+	$(TYPE) $(COMPILER_DIR2)\exproptc.c > $(OBJ_DIR)$(DIR_SEP)exproptc.cxx
+	$(COPY) $(OBJ_DIR2)\exproptc.cxx $(OBJ_DIR2)\exproptc.c
 
 $(OBJ_DIR)$(DIR_SEP)hbslex$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)hbslex.c
 	$(CC_CMD_HARBOUR)
 
 $(OBJ_DIR)$(DIR_SEP)hbslex.c : $(INCLUDE_DIR2)$(DIR_SEP)simplex.c
-	$(TYPE) $(COMPILER_DIR)$(DIR_SEP)hbslex.c > $(OBJ_DIR)$(DIR_SEP)hbslex.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)hbslex.cxx $(OBJ_DIR)$(DIR_SEP)hbslex.c
+	$(TYPE) $(COMPILER_DIR2)\hbslex.c > $(OBJ_DIR)$(DIR_SEP)hbslex.cxx
+	$(COPY) $(OBJ_DIR2)\hbslex.cxx $(OBJ_DIR2)\hbslex.c
 
 $(OBJ_DIR)$(DIR_SEP)macroa$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)macroa.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)macroa.c : $(INCLUDE_DIR2)$(DIR_SEP)hbexpra.c
-	$(TYPE) $(MACRO_DIR)$(DIR_SEP)macroa.c > $(OBJ_DIR)$(DIR_SEP)macroa.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)macroa.cxx $(OBJ_DIR)$(DIR_SEP)macroa.c
+	$(TYPE) $(MACRO_DIR2)\macroa.c > $(OBJ_DIR)$(DIR_SEP)macroa.cxx
+	$(COPY) $(OBJ_DIR2)\macroa.cxx $(OBJ_DIR2)\macroa.c
 
 $(OBJ_DIR)$(DIR_SEP)macrob$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)macrob.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)macrob.c : $(INCLUDE_DIR2)$(DIR_SEP)hbexprb.c
-	$(TYPE) $(MACRO_DIR)$(DIR_SEP)macrob.c > $(OBJ_DIR)$(DIR_SEP)macrob.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)macrob.cxx $(OBJ_DIR)$(DIR_SEP)macrob.c
+	$(TYPE) $(MACRO_DIR2)\macrob.c > $(OBJ_DIR)$(DIR_SEP)macrob.cxx
+	$(COPY) $(OBJ_DIR2)\macrob.cxx $(OBJ_DIR2)\macrob.c
 
 $(OBJ_DIR)$(DIR_SEP)macroc$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)macroc.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)macroc.c : $(INCLUDE_DIR2)$(DIR_SEP)hbexprc.c
-	$(TYPE) $(MACRO_DIR)$(DIR_SEP)macroc.c > $(OBJ_DIR)$(DIR_SEP)macroc.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)macroc.cxx $(OBJ_DIR)$(DIR_SEP)macroc.c
+	$(TYPE) $(MACRO_DIR2)\macroc.c > $(OBJ_DIR)$(DIR_SEP)macroc.cxx
+	$(COPY) $(OBJ_DIR2)\macroc.cxx $(OBJ_DIR2)\macroc.c
 
 $(OBJ_DIR)$(DIR_SEP)macroslx$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)macroslx.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)macroslx.c : $(INCLUDE_DIR2)$(DIR_SEP)simplex.c
-	$(TYPE) $(MACRO_DIR)$(DIR_SEP)macroslx.c > $(OBJ_DIR)$(DIR_SEP)macroslx.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)macroslx.cxx $(OBJ_DIR)$(DIR_SEP)macroslx.c
+	$(TYPE) $(MACRO_DIR2)\macroslx.c > $(OBJ_DIR)$(DIR_SEP)macroslx.cxx
+	$(COPY) $(OBJ_DIR2)\macroslx.cxx $(OBJ_DIR2)\macroslx.c
 
 #===============================================================================
 # Resource Dependencies
@@ -242,49 +242,49 @@ $(OBJ_DIR)$(DIR_SEP)CGILIB_thtm.c : $(CGI_DIR)$(DIR_SEP)thtm.prg
 # HBSSL.LIB
 #===============================================================================
 $(OBJ_DIR)$(DIR_SEP)bio$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)bio.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)err$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)err.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)evp$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)evp.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)evpciph$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)evpciph.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)evpenc$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)evpenc.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)evpmd$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)evpmd.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)evppkey$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)evppkey.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)pem$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)pem.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)rand$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)rand.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)ssl$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)ssl.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)sslciph$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)sslciph.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)sslctx$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)sslctx.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)sslsess$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)sslsess.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)ssl_hb$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)ssl_hb.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)x509$(OBJEXT) : $(HBSSL_DIR)$(DIR_SEP)x509.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 #===============================================================================
 # HBXDIFF.LIB
@@ -317,7 +317,7 @@ $(OBJ_DIR)$(DIR_SEP)xmissing$(OBJEXT) : $(HBXDIFF_DIR)$(DIR_SEP)xmissing.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)xpatchi$(OBJEXT) : $(HBXDIFF_DIR)$(DIR_SEP)xpatchi.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)xprepare$(OBJEXT) : $(HBXDIFF_DIR)$(DIR_SEP)xprepare.c
 	$(CC_CMD)
@@ -329,7 +329,7 @@ $(OBJ_DIR)$(DIR_SEP)xrabply$(OBJEXT) : $(HBXDIFF_DIR)$(DIR_SEP)xrabply.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)xutils$(OBJEXT) : $(HBXDIFF_DIR)$(DIR_SEP)xutils.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)xversion$(OBJEXT) : $(HBXDIFF_DIR)$(DIR_SEP)xversion.c
 	$(CC_CMD)
@@ -353,8 +353,8 @@ $(OBJ_DIR)$(DIR_SEP)hblib$(OBJEXT) : utils$(DIR_SEP)misc$(DIR_SEP)hblib.c
 # HBRC.EXE
 #===============================================================================
 $(OBJ_DIR)$(DIR_SEP)hbrc.c : ChangeLog
-	$(TYPE) utils$(DIR_SEP)misc$(DIR_SEP)hbrc.c > $(OBJ_DIR)$(DIR_SEP)hbrc.cxx
-	$(COPY) $(OBJ_DIR)$(DIR_SEP)hbrc.cxx $(OBJ_DIR)$(DIR_SEP)hbrc.c
+	$(TYPE) utils\misc\hbrc.c > $(OBJ_DIR)$(DIR_SEP)hbrc.cxx
+	$(COPY) $(OBJ_DIR2)\hbrc.cxx $(OBJ_DIR2)\hbrc.c
 
 $(OBJ_DIR)$(DIR_SEP)hbrc$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)hbrc.c
 	$(CC_CMD)
@@ -401,7 +401,7 @@ $(OBJ_DIR)$(DIR_SEP)mxml_ent$(OBJEXT) : $(HBMXML_DIR)$(DIR_SEP)mxml_ent.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)mxml_fil$(OBJEXT) : $(HBMXML_DIR)$(DIR_SEP)mxml_fil.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)mxml_get$(OBJEXT) : $(HBMXML_DIR)$(DIR_SEP)mxml_get.c
 	$(CC_CMD)
@@ -716,7 +716,7 @@ $(OBJ_DIR)$(DIR_SEP)tif_next$(OBJEXT) : $(TIFF_DIR)$(DIR_SEP)tif_next.c
 	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)tif_ojpeg$(OBJEXT) : $(TIFF_DIR)$(DIR_SEP)tif_ojpeg.c
-	$(CCC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)tif_open$(OBJEXT) : $(TIFF_DIR)$(DIR_SEP)tif_open.c
 	$(CCC_CMD)
@@ -1166,7 +1166,7 @@ $(OBJ_DIR)$(DIR_SEP)tif_extension_PDFLITE$(OBJEXT) : $(PDFLITE_DIR)$(DIR_SEP)tif
 	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)tif_fax3_PDFLITE$(OBJEXT) : $(PDFLITE_DIR)$(DIR_SEP)tiff$(DIR_SEP)tif_fax3.c
-	$(CCC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)tif_fax3sm_PDFLITE$(OBJEXT) : $(PDFLITE_DIR)$(DIR_SEP)tiff$(DIR_SEP)tif_fax3sm.c
 	$(CCC_CMD)
@@ -1190,7 +1190,7 @@ $(OBJ_DIR)$(DIR_SEP)tif_next_PDFLITE$(OBJEXT) : $(PDFLITE_DIR)$(DIR_SEP)tiff$(DI
 	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)tif_ojpeg_PDFLITE$(OBJEXT) : $(PDFLITE_DIR)$(DIR_SEP)tiff$(DIR_SEP)tif_ojpeg.c
-	$(CCC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)tif_open_PDFLITE$(OBJEXT) : $(PDFLITE_DIR)$(DIR_SEP)tiff$(DIR_SEP)tif_open.c
 	$(CCC_CMD)
@@ -1265,7 +1265,7 @@ $(OBJ_DIR)$(DIR_SEP)coreHBEXPAT$(OBJEXT) : $(HBEXPAT_DIR)$(DIR_SEP)core.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)xmlparse$(OBJEXT) : $(HBEXPAT_DIR)$(DIR_SEP)xmlparse.c
-	$(CCC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)xmltok_n$(OBJEXT) : $(HBEXPAT_DIR)$(DIR_SEP)xmltok_n.c
 	$(CC_CMD)
@@ -1382,7 +1382,7 @@ $(OBJ_DIR)$(DIR_SEP)coreHBLZF$(OBJEXT) : $(HBLZF_DIR)$(DIR_SEP)core.c
 	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)lzf_cHBLZF$(OBJEXT) : $(HBLZF_DIR)$(DIR_SEP)lzf_c.c
-	$(CCC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)lzf_dHBLZF$(OBJEXT) : $(HBLZF_DIR)$(DIR_SEP)lzf_d.c
 	$(CCC_CMD)
@@ -1406,7 +1406,7 @@ $(OBJ_DIR)$(DIR_SEP)crctableHBBZ2$(OBJEXT) : $(HBBZ2_DIR)$(DIR_SEP)crctable.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)decompreHBBZ2$(OBJEXT) : $(HBBZ2_DIR)$(DIR_SEP)decompre.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)huffmanHBBZ2$(OBJEXT) : $(HBBZ2_DIR)$(DIR_SEP)huffman.c
 	$(CC_CMD)
@@ -1468,7 +1468,7 @@ $(OBJ_DIR)$(DIR_SEP)code39$(OBJEXT) : $(HBZEBRA_DIR)$(DIR_SEP)code39.c
 $(OBJ_DIR)$(DIR_SEP)code93$(OBJEXT) : $(HBZEBRA_DIR)$(DIR_SEP)code93.c
 	$(CC_CMD)
 
-$(OBJ_DIR)$(DIR_SEP)coreHBZEBRA$(OBJEXT) : $(HBZEBRA_DIR)$(DIR_SEP)core.c
+$(OBJ_DIR)$(DIR_SEP)core$(OBJEXT) : $(HBZEBRA_DIR)$(DIR_SEP)core.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)coredraw$(OBJEXT) : $(HBZEBRA_DIR)$(DIR_SEP)coredraw.c
@@ -1502,10 +1502,10 @@ $(OBJ_DIR)$(DIR_SEP)hbcurl$(OBJEXT) : $(HBCURL_DIR)$(DIR_SEP)hbcurl.c
 # HBSQLIT3.LIB Dependencies
 #===============================================================================
 $(OBJ_DIR)$(DIR_SEP)sqlite3$(OBJEXT) : $(HBSQLIT3_DIR)$(DIR_SEP)sqlite3.c
-	$(CCC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)xhbsqlite3$(OBJEXT) : $(HBSQLIT3_DIR)$(DIR_SEP)xhbsqlite3.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 #===============================================================================
 # SEVENZIP.LIB rules
@@ -3663,7 +3663,7 @@ $(OBJ_DIR)$(DIR_SEP)wvtcore$(OBJEXT) : $(GTWVG_DIR)$(DIR_SEP)wvtcore.c
 	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)wvtutils$(OBJEXT) : $(GTWVG_DIR)$(DIR_SEP)wvtutils.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)wvtclass$(OBJEXT) : $(OBJ_DIR)$(DIR_SEP)wvtclass.c
 	$(CC_CMD)
@@ -5049,7 +5049,7 @@ $(OBJ_DIR)$(DIR_SEP)mzip$(OBJEXT) : $(HBMZIP_DIR)$(DIR_SEP)zip.c
 	$(CC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)unzip$(OBJEXT) : $(HBMZIP_DIR)$(DIR_SEP)unzip.c
-	$(CC_CMD)
+	$(CC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hbmzip$(OBJEXT) : $(HBMZIP_DIR)$(DIR_SEP)hbmzip.c
 	$(CC_CMD)
@@ -6105,178 +6105,185 @@ $(OBJ_DIR)$(DIR_SEP)pngwutil$(OBJEXT) : $(PNG_DIR)$(DIR_SEP)pngwutil.c
 # HBHPDF.LIB dependencies
 #===============================================================================
 $(OBJ_DIR)$(DIR_SEP)harupdf$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)harupdf.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_utils$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_utils.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_error$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_error.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_mmgr$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_mmgr.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_list$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_list.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_streams$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_streams.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_objects$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_objects.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_null$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_null.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_boolean$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_boolean.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_number$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_number.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_namedict$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_namedict.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_pdfa$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_pdfa.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_real$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_real.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_name$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_name.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_array$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_array.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_dict$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_dict.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_xref$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_xref.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_encoder$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_encoder.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_string$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_string.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_binary$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_binary.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_encrypt$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_encrypt.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_encryptdict$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_encryptdict.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef_tt$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef_tt.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef_type1$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef_type1.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef_base14$(OBJEXT): $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef_base14.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef_cid$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef_cid.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_font$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_font.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_font_type1$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_font_type1.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_font_tt$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_font_tt.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_font_cid$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_font_cid.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_doc$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_doc.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_info$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_info.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_catalog$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_catalog.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_page_label$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_page_label.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_gstate$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_gstate.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_pages$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_pages.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_page_operator$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_page_operator.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_destination$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_destination.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_annotation$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_annotation.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_outline$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_outline.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_image$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_image.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_encoder_jp$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_encoder_jp.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_encoder_kr$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_encoder_kr.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_encoder_cns$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_encoder_cns.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_encoder_cnt$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_encoder_cnt.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef_jp$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef_jp.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef_kr$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef_kr.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef_cns$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef_cns.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_fontdef_cnt$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_fontdef_cnt.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_image_png$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_image_png.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_doc_png$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_doc_png.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_ext_gstate$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_ext_gstate.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_u3d$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_u3d.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_3dmeasure$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_3dmeasure.c
-	$(CC_CMD)	
+	$(CCC_CMD)	
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_encoder_utf$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_encoder_utf.c
-	$(CC_CMD)
+	$(CCC_CMD_NOWARN)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_exdata$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_exdata.c
-	$(CC_CMD)
+	$(CCC_CMD)
 
 $(OBJ_DIR)$(DIR_SEP)hpdf_image_ccitt$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_image_ccitt.c
-	$(CC_CMD)	
+	$(CCC_CMD_NOWARN)	
+
+$(OBJ_DIR)$(DIR_SEP)hpdf_direct$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_direct.c
+	$(CCC_CMD)	
+
+$(OBJ_DIR)$(DIR_SEP)hpdf_shading$(OBJEXT) : $(HBHPDF_DIR)$(DIR_SEP)hpdf_shading.c
+	$(CCC_CMD_NOWARN)	
+
 #===============================================================================
 # TIPSSL.LIB rules
 #===============================================================================

@@ -4096,7 +4096,7 @@ METHOD ValidateSettings() CLASS TMakeProject
             ::Set_XCC( s_sxCCFolder )
          ELSEIF File( s_sBCCFolder + "\bin\bcc32.exe" )
             ::Set_BCC( s_sBCCFolder )
-         ELSEIF File( s_sVCFolder + "\bin\cl.exe" )
+         ELSEIF File( s_sVCFolder + "\" + s_sVCBinFolder + "\" + s_sVC_CL )
             ::Set_VC( s_sVCFolder, , , s_sVC_CL, s_sVC_LIB, s_sVC_LINK )
          ELSEIF File( s_sPOCCFolder + "\bin\pocc.exe" )
             ::Set_POCC( s_sPOCCFolder )
@@ -4753,7 +4753,7 @@ FUNCTION Find_CCompiler( C_Compiler, C_Root )
 
 #ifdef __PLATFORM__Windows
       CASE C_Compiler == "MSVC"
-         IF File( s_sVCFolder + "\bin\cl.exe" )
+         IF File( s_sVCFolder + "\" + s_sVCBinFolder + "\" + s_sVC_CL )
             C_Root := Pad( s_sVCFolder, 128 )
            RETURN .T.
          ENDIF
@@ -5072,6 +5072,14 @@ INIT PROCEDURE InitTProject
       ENDIF      
 
       s_sHostArch = GetEnv( "PROCESSOR_ARCHITECTURE" )
+
+      // Map PROCESSOR_ARCHITECTURE to VS HostArch folder names
+      DO CASE
+         CASE Upper( s_sHostArch ) == "AMD64"
+            s_sHostArch := "x64"
+         CASE Upper( s_sHostArch ) == "ARM64"
+            s_sHostArch := "arm64"
+      ENDCASE
    
       s_sProgramsFolder := GetEnv( "ProgramFiles(x86)" )
       IF Empty( s_sProgramsFolder ) .OR. ( ! IsDirectory( s_sProgramsFolder ) )
@@ -5298,12 +5306,11 @@ INIT PROCEDURE InitTProject
       IF File( s_sProgramsFolder + "\Microsoft Visual Studio\Installer\vswhere.exe" )   
          __Run( '"' + s_sProgramsFolder + '\Microsoft Visual Studio\Installer\vswhere.exe" -latest -legacy -property InstallationPath > $VS-latest-path_.txt' )
       
-         cVSPath := MemoRead( "$VS-latest-path_.txt" ) ; FErase( "$VS-latest-path_.txt" )
-         cVSPath := Left( cVSPath, Len(cVSPath ) - 2 )
+         cVSPath := AllTrim( StrTran( StrTran( MemoRead( "$VS-latest-path_.txt" ), Chr(13), "" ), Chr(10), "" ) )
+         FErase( "$VS-latest-path_.txt" )
          
          IF File( cVSPath + "\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt" )  
-            cVCVer := MemoRead(  cVSPath + "\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt" )         
-            cVCVer := Trim( Left( cVCVer, Len( cVCVer ) - 2 ) )
+            cVCVer := AllTrim( StrTran( StrTran( MemoRead( cVSPath + "\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt" ), Chr(13), "" ), Chr(10), "" ) )
          ENDIF
       ENDIF
       
